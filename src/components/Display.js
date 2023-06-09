@@ -50,7 +50,7 @@ function Display() {
       headerName: "Link",
       flex: 0.8,
     }
-  ]
+  ];
 
   return (
     <>
@@ -88,14 +88,18 @@ function Display() {
               Submit
             </Button>
           </Grid>
-        </Grid>
-      </Box>
-      <DataGrid
-          loading={true}
-          getRowId={(row) => row.name}
+          <Box sx={{ height: "calc(100vh - 320px)", width: "100%" }}>
+        <DataGrid
+          loading={false}
+          getRowId={(row) => row.id}
           rows={data}
           columns={columns}
         />
+      </Box>
+        </Grid>
+        
+      </Box>
+      
     </>
   );
 }
