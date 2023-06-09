@@ -26,6 +26,7 @@ function Display() {
   };
   const handleConfirm = () => {
     console.log(selectedRows);
+    axios.post("http://127.0.0.1:8000/s_link", { s_links: selectedRows })
   };
 
   const columns = [
