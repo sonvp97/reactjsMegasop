@@ -112,7 +112,8 @@ function Display() {
                 const selectedRows = data.filter((row) =>
                   selectedIDs.has(row.id)
                 );
-                setSelectedRows(selectedRows);
+                const selectedLinks = selectedRows.map((row) => row.link);
+                setSelectedRows(selectedLinks);
               }}
             />
           </Box>
