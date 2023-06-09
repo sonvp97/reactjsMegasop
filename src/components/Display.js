@@ -107,6 +107,11 @@ function Display() {
               rows={data}
               checkboxSelection
               disableRowSelectionOnClick
+              initialState={{
+                ...data.initialState,
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+              pageSizeOptions={[10, 20, 30]}
               onRowSelectionModelChange={(ids) => {
                 const selectedIDs = new Set(ids);
                 const selectedRows = data.filter((row) =>
