@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField, Checkbox } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 function Display() {
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -15,16 +16,24 @@ function Display() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('http://127.0.0.1:8000/' + form.search);
+      const response = await axios.get("http://127.0.0.1:8000/" + form.search);
       setData(response.data);
-      console.log(data)
-      console.log('Yêu cầu đã được gửi thành công!');
+      console.log(data);
+      console.log("Yêu cầu đã được gửi thành công!");
     } catch (error) {
-      console.error('Lỗi khi gửi yêu cầu:', error);
+      console.error("Lỗi khi gửi yêu cầu:", error);
     }
   };
-  
+  const handleConfirm = () => {
+    console.log(selectedRows);
+  };
+
   const columns = [
+    {
+      field: "id",
+      headerName: "Id",
+      flex: 0.8,
+    },
     {
       field: "name",
       headerName: "Name",
@@ -49,7 +58,7 @@ function Display() {
       field: "link",
       headerName: "Link",
       flex: 0.8,
-    }
+    },
   ];
 
   return (
@@ -87,19 +96,28 @@ function Display() {
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit
             </Button>
+            <Button variant="contained" color="primary" onClick={handleConfirm}>
+              Xác nhận
+            </Button>
           </Grid>
           <Box sx={{ height: "calc(100vh - 320px)", width: "100%" }}>
-        <DataGrid
-          loading={false}
-          getRowId={(row) => row.id}
-          rows={data}
-          columns={columns}
-        />
-      </Box>
+            <DataGrid
+              getRowId={(row) => row.id}
+              columns={columns}
+              rows={data}
+              checkboxSelection
+              disableRowSelectionOnClick
+              onRowSelectionModelChange={(ids) => {
+                const selectedIDs = new Set(ids);
+                const selectedRows = data.filter((row) =>
+                  selectedIDs.has(row.id)
+                );
+                setSelectedRows(selectedRows);
+              }}
+            />
+          </Box>
         </Grid>
-        
       </Box>
-      
     </>
   );
 }
