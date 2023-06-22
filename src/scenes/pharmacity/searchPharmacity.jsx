@@ -145,12 +145,17 @@ function Search() {
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
-          <Link href={`https://www.pharmacity.vn/${linkUrl}.html`} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+          <Link
+            href={`https://www.pharmacity.vn/${linkUrl}.html`}
+            target="_blank"
+            rel="noopener"
+            sx={{ color: "white", textDecoration: "none" }}
+          >
             https://www.pharmacity.vn/{linkUrl}.html
           </Link>
         );
       },
-    }
+    },
   ];
 
   return (
@@ -212,10 +217,10 @@ function Search() {
                 color="primary"
                 onClick={handleSubmit}
                 sx={{ mr: 2 }}
-                disabled={loading} // Disable nút Search khi đang loading
+                disabled={loading}
               >
                 {loading ? (
-                  <CircularProgress size={24} /> // Hiển thị CircularProgress khi đang loading
+                  <CircularProgress size={24} />
                 ) : (
                   "Search"
                 )}

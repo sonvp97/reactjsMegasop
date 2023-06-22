@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 function Layout() {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  
+
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
       <Sidebar
@@ -26,7 +26,6 @@ function Layout() {
         <Outlet />
       </Box>
     </Box>
-    // : <Navigate to="/login" />
   );
 }
 

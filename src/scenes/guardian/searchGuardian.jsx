@@ -9,7 +9,7 @@ import {
   Modal,
   Typography,
   CircularProgress,
-  Link
+  Link,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -138,12 +138,17 @@ function Search() {
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
-          <Link href={linkUrl} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+          <Link
+            href={linkUrl}
+            target="_blank"
+            rel="noopener"
+            sx={{ color: "white", textDecoration: "none" }}
+          >
             {linkUrl}
           </Link>
         );
       },
-    }
+    },
   ];
 
   return (

@@ -56,8 +56,6 @@ function Search() {
     fetchData();
   }, [paginationModel.page, paginationModel.pageSize, loading]);
 
-  // thêm một useEffect mới, được kích hoạt khi errorOccurred thay đổi. Nếu errorOccurred là true,
-  // tức là đã xảy ra lỗi, chúng ta hiển thị thông báo lỗi một lần duy nhất
   useEffect(() => {
     if (errorOccurred) {
       toast.error("Có lỗi xảy ra khi lấy dữ liệu từ database " + error, {
@@ -86,10 +84,10 @@ function Search() {
       console.log(response.data);
       console.log("Yêu cầu đã được gửi thành công!");
       setLoading(false);
-      setErrorOccurred(false); // Đặt biến trạng thái lỗi về false khi thành công
+      setErrorOccurred(false);
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
-      setErrorOccurred(true); // Đặt biến trạng thái lỗi thành true
+      setErrorOccurred(true);
       setError(error);
     }
     setLoading(false);

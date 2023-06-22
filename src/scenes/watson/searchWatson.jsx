@@ -135,12 +135,17 @@ function Search() {
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
-          <Link href={linkUrl} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+          <Link
+            href={linkUrl}
+            target="_blank"
+            rel="noopener"
+            sx={{ color: "white", textDecoration: "none" }}
+          >
             {linkUrl}
           </Link>
         );
       },
-    }
+    },
   ];
 
   return (
@@ -178,8 +183,6 @@ function Search() {
               borderRadius: "50%",
             },
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
-              // CSS styles for checked checkbox input
-              // For example:
               color: "white",
             },
           }}
@@ -202,10 +205,10 @@ function Search() {
                 color="primary"
                 onClick={handleSubmit}
                 sx={{ mr: 2 }}
-                disabled={loading} // Disable nút Search khi đang loading
+                disabled={loading}
               >
                 {loading ? (
-                  <CircularProgress size={24} /> // Hiển thị CircularProgress khi đang loading
+                  <CircularProgress size={24} />
                 ) : (
                   "Search"
                 )}
