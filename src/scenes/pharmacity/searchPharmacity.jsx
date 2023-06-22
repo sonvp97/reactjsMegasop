@@ -9,6 +9,7 @@ import {
   Modal,
   Typography,
   CircularProgress,
+  Link,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -141,7 +142,15 @@ function Search() {
       field: "link",
       headerName: "Link",
       flex: 1,
-    },
+      renderCell: (params) => {
+        const linkUrl = params.value;
+        return (
+          <Link href={`https://www.pharmacity.vn/${linkUrl}.html`} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+            https://www.pharmacity.vn/{linkUrl}.html
+          </Link>
+        );
+      },
+    }
   ];
 
   return (

@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
   Grid,
   TextField,
-  Checkbox,
   useTheme,
   Modal,
   Typography,
   CircularProgress,
+  Link,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -123,16 +123,24 @@ function Search() {
       headerName: "Name",
       flex: 0.8,
     },
-    // {
-    //   field: "brand_name",
-    //   headerName: "Brand Name",
-    //   flex: 0.3,
-    // },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      flex: 0.1,
     },
+    {
+      field: "link",
+      headerName: "Link",
+      flex: 0.8,
+      renderCell: (params) => {
+        const linkUrl = params.value;
+        return (
+          <Link href={linkUrl} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+            {linkUrl}
+          </Link>
+        );
+      },
+    }
   ];
 
   return (

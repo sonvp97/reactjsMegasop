@@ -13,6 +13,7 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import { ToastContainer, toast } from 'react-toastify';
+import { API_BASE_URL } from "../api/api.jsx";
 
 
 function Search() {
@@ -31,7 +32,7 @@ function Search() {
     setLoading(true)
     e.preventDefault();
     try {
-      const response = await axios.get("http://127.0.0.1:8000/hasaki/" + form.search);
+      const response = await axios.get(API_BASE_URL + "/cron-job" + form.search);
       setData(response.data);
       console.log(data);
       console.log("Yêu cầu đã được gửi thành công!");
@@ -49,7 +50,7 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post("http://127.0.0.1:8000/hasaki/save", {
+      const response = await axios.post(API_BASE_URL + "/hasaki/save", {
         s_links: selectedRows,
       });
       console.log(response.data);

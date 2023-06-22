@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -9,6 +9,7 @@ import {
   Modal,
   Typography,
   CircularProgress,
+  Link
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -134,7 +135,15 @@ function Search() {
       field: "link",
       headerName: "Link",
       flex: 1,
-    },
+      renderCell: (params) => {
+        const linkUrl = params.value;
+        return (
+          <Link href={linkUrl} target="_blank" rel="noopener" sx={{ color: 'white', textDecoration: 'none' }}>
+            {linkUrl}
+          </Link>
+        );
+      },
+    }
   ];
 
   return (

@@ -6,7 +6,7 @@ import Layout from "scenes/layout";
 import { themeSettings } from "theme";
 import { useSelector } from "react-redux";
 import Search from "scenes/hasaki/search";
-import List from "scenes/hasaki/list";
+import List from "scenes/hasaki/listHasaki";
 import SearchPharmacity from "scenes/pharmacity/searchPharmacity";
 import ListPharmacity from "scenes/pharmacity/listPharmacity";
 import ListGuardian  from "scenes/guardian/listGuardian";
