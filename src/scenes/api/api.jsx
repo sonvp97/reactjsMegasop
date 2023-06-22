@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://thanhdev.info";
+export const API_BASE_URL = "http://react.thanhdev.info";

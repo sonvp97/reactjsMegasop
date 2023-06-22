@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
-import { ToastContainer, toast } from "react-toastify";
-import { API_BASE_URL } from "../api/api.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+import { API_BASE_URL } from "scenes/api/api";
 
 function Search() {
   const theme = useTheme();
@@ -31,11 +31,16 @@ function Search() {
     setLoading(true);
     e.preventDefault();
     try {
-      const response = await axios.get(
-        API_BASE_URL + "/cron-job" + form.search
-      );
-      setData(response.data);
-      console.log(data);
+      const status = true;
+      const hour = parseInt(form.hour);
+      const minute = 0;
+      console.log(hour);
+      const response = await axios.post(API_BASE_URL + "/cron-job",{
+        status,
+        hour,
+        minute,
+      });
+           
       console.log("Yêu cầu đã được gửi thành công!");
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -47,22 +52,21 @@ function Search() {
   const handleClose = () => {
     setOpen(false);
   };
-
+ 
   const handleConfirm = async () => {
     try {
-      // Gửi yêu cầu đến server
-      const response = await axios.post(API_BASE_URL + "/hasaki/save", {
-        s_links: selectedRows,
+
+      const status = false;
+      const hour = 0;
+      const minute = 0;
+      const response = await axios.post(API_BASE_URL + "/cron-job", {
+        status,
+        hour,
+        minute,
       });
       console.log(response.data);
-      if (response.data === "successful") {
-        toast.success("Lưu thành công!", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
-      } else {
-        toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
+      if (response.data === "deleted") {
+        toast.success("Tự động Crawl đã được tắt", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,
