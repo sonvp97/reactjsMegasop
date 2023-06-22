@@ -6,12 +6,13 @@ import {
   Grid,
   TextField,
   useTheme,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
-import { API_BASE_URL } from "../api/api.jsx";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
   const [form, setForm] = useState({});
@@ -23,23 +24,22 @@ function Search() {
     });
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      setLoading(true)
+    if (event.key === "Enter") {
+      setLoading(true);
     }
   };
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     if (!form.search) {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
         hideProgressBar: true,
       });
-    }else{
-      setLoading(true)
+    } else {
+      setLoading(true);
     }
   };
-
 
   const [paginationModel, setPaginationModel] = React.useState({
     pageSize: 10,
@@ -48,34 +48,52 @@ function Search() {
   const [totalRows, setTotalRows] = useState(0);
   const theme = useTheme();
   const [data, setData] = useState([]);
+  const [errorOccurred, setErrorOccurred] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     fetchData();
-  }, [paginationModel.page,paginationModel.pageSize,loading]);
+  }, [paginationModel.page, paginationModel.pageSize, loading]);
+
+  // thêm một useEffect mới, được kích hoạt khi errorOccurred thay đổi. Nếu errorOccurred là true,
+  // tức là đã xảy ra lỗi, chúng ta hiển thị thông báo lỗi một lần duy nhất
+  useEffect(() => {
+    if (errorOccurred) {
+      toast.error("Có lỗi xảy ra khi lấy dữ liệu từ database " + error, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
+      setError("");
+    }
+  }, [errorOccurred]);
 
   const fetchData = async () => {
-      try {
-        const skip = paginationModel.page * paginationModel.pageSize;
-        const limit = paginationModel.pageSize;
-        const search = form.search; // Cập nhật tham số tìm kiếm thành "search"
-        console.log(form.search);
-        const response = await axios.get(API_BASE_URL + "/guardian", {
-          params: {
-            skip,
-            limit,
-            name: `${search}`, // Truyền tham số tìm kiếm "search"
-          },
-        });
-        setData(response.data.listGuardian);
-        setTotalRows(response.data.count);
-        console.log(response.data);
-        console.log("Yêu cầu đã được gửi thành công!");
-        
-      } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error);
-      }
-    setLoading(false)
+    try {
+      const skip = paginationModel.page * paginationModel.pageSize;
+      const limit = paginationModel.pageSize;
+      const search = form.search;
+      console.log(form.search);
+      const response = await axios.get(API_BASE_URL + "/guardian", {
+        params: {
+          skip,
+          limit,
+          name: `${search}`,
+        },
+      });
+      setData(response.data.listGuardian);
+      setTotalRows(response.data.count);
+      console.log(response.data);
+      console.log("Yêu cầu đã được gửi thành công!");
+      setLoading(false);
+      setErrorOccurred(false); // Đặt biến trạng thái lỗi về false khi thành công
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+      setErrorOccurred(true); // Đặt biến trạng thái lỗi thành true
+      setError(error);
+    }
+    setLoading(false);
   };
-  
 
   const columns = [
     {
@@ -108,7 +126,7 @@ function Search() {
   return (
     <>
       <Box m="1.5rem 2.5rem" maxWidth={"170vh"}>
-      <ToastContainer />
+        <ToastContainer />
         <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
           mt="40px"
@@ -159,7 +177,7 @@ function Search() {
               />
             </Box>
             <Box sx={{ mb: 3 }}>
-            <Button
+              <Button
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
@@ -174,7 +192,7 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-           <DataGrid
+          <DataGrid
             rows={data ? data : []}
             // rows={data}
             columns={columns}
@@ -184,7 +202,7 @@ function Search() {
             rowCount={totalRows}
             paginationMode="server"
           />
-          </Box>
+        </Box>
       </Box>
     </>
   );

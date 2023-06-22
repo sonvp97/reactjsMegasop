@@ -12,10 +12,9 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
-
 
 function Search() {
   const theme = useTheme();
@@ -48,6 +47,11 @@ function Search() {
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
         console.error("Lỗi khi gửi yêu cầu:", error);
+        toast.error("Xuất hiện lỗi trong quá trình lấy dữ liệu " + error, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     } else {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -68,19 +72,21 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post(
-        API_BASE_URL + "/linkPharmacity",
-        {
-          s_links: selectedRows,
-        }
-      );
+      const response = await axios.post(API_BASE_URL + "/linkPharmacity", {
+        s_links: selectedRows,
+      });
       console.log(response.data);
       if (response.data.message === "successful") {
-        toast.success("Bạn đã lưu " + response.data.size + " link!", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        toast.success(
+          "Bạn đã lưu tổng cộng " +
+            response.data.size +
+            " link trong cơ sở dữ liệu!",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+            hideProgressBar: true,
+          }
+        );
       } else {
         toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
           position: toast.POSITION.TOP_CENTER,

@@ -16,7 +16,6 @@ import { API_BASE_URL } from "../api/api.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function Search() {
   const theme = useTheme();
   const [form, setForm] = useState({});
@@ -44,14 +43,19 @@ function Search() {
         const response = await axios.get(
           API_BASE_URL + "/guardian/" + form.search
         );
-
         setData(response.data);
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
         console.error("Lỗi khi gửi yêu cầu:", error);
+        console.error("Lỗi khi gửi yêu cầu:", error);
+        toast.error("Xuất hiện lỗi trong quá trình lấy dữ liệu " + error, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
-    } else {
+    } else if (form) {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
@@ -69,16 +73,21 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post( API_BASE_URL + "/guardian", {
+      const response = await axios.post(API_BASE_URL + "/guardian", {
         s_links: selectedRows,
       });
       console.log(response.data);
       if (response.data.message === "successful") {
-        toast.success("Bạn đã lưu " + response.data.size + " link!", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        toast.success(
+          "Bạn đã lưu tổng cộng " +
+            response.data.size +
+            " link trong cơ sở dữ liệu!",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+            hideProgressBar: true,
+          }
+        );
       } else {
         toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
           position: toast.POSITION.TOP_CENTER,

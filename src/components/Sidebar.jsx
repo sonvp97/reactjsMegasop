@@ -56,7 +56,6 @@ const Sidebar = ({
   const [watsonOpen, setWatsonOpen] = useState(false);
   const [crawlOpen, setCrawlOpen] = useState(false);
 
-
   const navItems = [
     {
       text: "Client Facing",
@@ -70,12 +69,12 @@ const Sidebar = ({
         {
           text: "Search Hasaki",
           icon: <SearchRounded />,
-          link: "hasaki/search"
+          link: "hasaki/search",
         },
         {
           text: "Hasaki List",
           icon: <ListAltRounded />,
-          link: "hasaki"
+          link: "hasaki",
         },
       ],
     },
@@ -87,12 +86,12 @@ const Sidebar = ({
         {
           text: "Search Pharmacity",
           icon: <SearchRounded />,
-          link: "pharmacity/search"
+          link: "pharmacity/search",
         },
         {
           text: "List Pharmacity",
           icon: <ListAltRounded />,
-          link: "pharmacity"
+          link: "pharmacity",
         },
       ],
     },
@@ -104,12 +103,12 @@ const Sidebar = ({
         {
           text: "Search Guardian",
           icon: <SearchRounded />,
-          link: "guardian/search"
+          link: "guardian/search",
         },
         {
           text: "List Guardian",
           icon: <ListAltRounded />,
-          link: "guardian"
+          link: "guardian",
         },
       ],
     },
@@ -121,12 +120,12 @@ const Sidebar = ({
         {
           text: "Search Watson",
           icon: <SearchRounded />,
-          link: "watson/search"
+          link: "watson/search",
         },
         {
           text: "List Watson",
           icon: <ListAltRounded />,
-          link: "watson"
+          link: "watson",
         },
       ],
     },
@@ -142,9 +141,8 @@ const Sidebar = ({
         {
           text: "Crawl Edit",
           icon: <AddCircleRounded />,
-          link: "crawl/options"
-        }
-
+          link: "crawl/options",
+        },
       ],
     },
   ];
@@ -187,8 +185,8 @@ const Sidebar = ({
               width: drawerWidth,
             },
             "& .MuiPaper-root::-webkit-scrollbar": {
-                overflowY: "hidden",
-            }
+              overflowY: "hidden",
+            },
           }}
         >
           <Box width="100%">
@@ -241,7 +239,7 @@ const Sidebar = ({
                               handlePharmacityDropDown();
                             } else if (text === "Watson") {
                               handleWatsonDropDown();
-                            }else if (text === "Crawl") {
+                            } else if (text === "Crawl") {
                               handleCrawlDropDown();
                             }
                           }
