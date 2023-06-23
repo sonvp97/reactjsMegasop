@@ -39,7 +39,8 @@ function Search() {
     if (form.search) {
       try {
         const response = await axios.get(
-          API_BASE_URL + "/hasaki/" + form.search,{
+          API_BASE_URL + "/hasaki/" + form.search,
+          {
             headers: {
               Authorization: `Bearer ${authToken}`,
             },
@@ -142,7 +143,7 @@ function Search() {
     },
     {
       field: "quantity",
-      headerName: "Quantity",
+      headerName: "Sold Items",
       flex: 0.3,
     },
     {
@@ -224,11 +225,7 @@ function Search() {
                 sx={{ mr: 2 }}
                 disabled={loading}
               >
-                {loading ? (
-                  <CircularProgress size={24} />
-                ) : (
-                  "Search"
-                )}
+                {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
               <Button variant="contained" color="primary" onClick={handleModal}>
                 Submit

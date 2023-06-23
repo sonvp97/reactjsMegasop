@@ -113,8 +113,8 @@ function Search() {
       flex: 0.3,
     },
     {
-      field: "total",
-      headerName: "Total",
+      field: "original_price",
+      headerName: "Original price",
       flex: 0.3,
     },
     {
