@@ -77,14 +77,17 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      // Gửi yêu cầu đến server
-      const response = await axios.post(API_BASE_URL + "/watsons", {
-        s_links: selectedRows,
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      console.log(selectedRows);
+      // Send request to the server
+      const response = await axios.post(
+        API_BASE_URL + "/watsons",
+        {
+          s_links: selectedRows,
         },
-      });
+
+      );
       console.log(response.data);
+      // Handle the response
       if (response.data.message === "successful") {
         toast.success(
           "Bạn đã lưu tổng cộng " +
@@ -113,6 +116,7 @@ function Search() {
       });
     }
   };
+  
   const handleModal = async () => {
     setOpen(true);
   };
@@ -243,8 +247,12 @@ function Search() {
               const selectedRows = data.filter((row) =>
                 selectedIDs.has(row.id)
               );
-              const selectedLinks = selectedRows.map((row) => row.link);
-              setSelectedRows(selectedLinks);
+              const selectedData = selectedRows.map((row) => ({
+                link: row.link,
+                id_watson: row.idWatson,
+              }));
+              console.log(selectedData)
+              setSelectedRows(selectedData);
             }}
           />
           <Modal open={open} onClose={handleClose}>
