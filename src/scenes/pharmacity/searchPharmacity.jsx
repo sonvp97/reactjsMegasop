@@ -41,7 +41,8 @@ function Search() {
     if (form.search) {
       try {
         const response = await axios.get(
-          API_BASE_URL + "/pharmacity/" + form.search,{
+          API_BASE_URL + "/pharmacity/" + form.search,
+          {
             headers: {
               Authorization: `Bearer ${authToken}`,
             },
@@ -78,7 +79,8 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post(API_BASE_URL + "/linkPharmacity", 
+      const response = await axios.post(
+        API_BASE_URL + "/linkPharmacity/",
         {
           s_links: selectedRows,
         },
