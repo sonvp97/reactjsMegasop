@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Search() {
+  const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
@@ -42,7 +43,11 @@ function Search() {
     if (form.search) {
       try {
         const response = await axios.get(
-          API_BASE_URL + "/guardian/" + form.search
+          API_BASE_URL + "/guardian/" + form.search,{
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
         );
         setData(response.data);
         console.log(data);
@@ -76,6 +81,9 @@ function Search() {
       // Gửi yêu cầu đến server
       const response = await axios.post(API_BASE_URL + "/guardian", {
         s_links: selectedRows,
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       });
       console.log(response.data);
       if (response.data.message === "successful") {
@@ -155,7 +163,7 @@ function Search() {
     <>
       <Box m="1.5rem 2.5rem">
         <ToastContainer />
-        <Header title="PHARMACITY" subtitle="Search of Pharmacity" />
+        <Header title="GUARDIAN" subtitle="Search of Guardian" />
         <Box
           mt="40px"
           height="75vh"

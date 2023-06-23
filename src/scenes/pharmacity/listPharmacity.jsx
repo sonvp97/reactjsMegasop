@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
+  const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
@@ -78,6 +79,9 @@ function Search() {
           limit,
           name: `${search}`,
         },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       });
       setData(response.data.listPharmacity);
       setTotalRows(response.data.count);
@@ -110,8 +114,8 @@ function Search() {
       flex: 0.3,
     },
     {
-      field: "brick_price",
-      headerName: "Brick Price",
+      field: "original_price",
+      headerName: "Original Price",
       flex: 0.3,
     },
     {
@@ -125,7 +129,7 @@ function Search() {
     <>
       <Box m="1.5rem 2.5rem">
         <ToastContainer />
-        <Header title="PHARMACITY" subtitle="List Pharmacity" />
+        <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
           mt="40px"
           height="75vh"

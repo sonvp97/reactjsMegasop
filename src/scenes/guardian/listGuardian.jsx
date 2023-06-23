@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
+  const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
@@ -79,6 +80,9 @@ function Search() {
           skip,
           limit,
           name: `${search}`,
+        },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
         },
       });
       setData(response.data.listGuardian);

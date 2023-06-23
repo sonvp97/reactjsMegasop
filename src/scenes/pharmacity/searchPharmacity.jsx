@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
+  const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
@@ -40,7 +41,11 @@ function Search() {
     if (form.search) {
       try {
         const response = await axios.get(
-          API_BASE_URL + "/pharmacity/" + form.search
+          API_BASE_URL + "/pharmacity/" + form.search,{
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
         );
 
         setData(response.data);
@@ -75,6 +80,9 @@ function Search() {
       // Gửi yêu cầu đến server
       const response = await axios.post(API_BASE_URL + "/linkPharmacity", {
         s_links: selectedRows,
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       });
       console.log(response.data);
       if (response.data.message === "successful") {
@@ -129,8 +137,8 @@ function Search() {
       flex: 0.3,
     },
     {
-      field: "brickPrice",
-      headerName: "Brick price",
+      field: "originalPrice",
+      headerName: "Original price",
       flex: 0.3,
     },
     {
@@ -219,11 +227,7 @@ function Search() {
                 sx={{ mr: 2 }}
                 disabled={loading}
               >
-                {loading ? (
-                  <CircularProgress size={24} />
-                ) : (
-                  "Search"
-                )}
+                {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
               <Button variant="contained" color="primary" onClick={handleModal}>
                 Submit

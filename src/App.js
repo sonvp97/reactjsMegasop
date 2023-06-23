@@ -9,12 +9,12 @@ import Search from "scenes/hasaki/search";
 import List from "scenes/hasaki/listHasaki";
 import SearchPharmacity from "scenes/pharmacity/searchPharmacity";
 import ListPharmacity from "scenes/pharmacity/listPharmacity";
-import ListGuardian  from "scenes/guardian/listGuardian";
-import SearchGuardian  from "scenes/guardian/searchGuardian";
+import ListGuardian from "scenes/guardian/listGuardian";
+import SearchGuardian from "scenes/guardian/searchGuardian";
 import SearchWatson from "scenes/watson/searchWatson";
 import ListWatson from "scenes/watson/listWatson";
 import CrawlControl from "scenes/crawl/control";
-
+import Login from "scenes/login";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -25,8 +25,8 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            <Route path="/" element={<Login />} />
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/hasaki/search" replace />} />
               <Route path="/hasaki/search" element={<Search />} />
               <Route path="/hasaki" element={<List />} />
               <Route path="/pharmacity/search" element={<SearchPharmacity />} />
@@ -43,5 +43,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
