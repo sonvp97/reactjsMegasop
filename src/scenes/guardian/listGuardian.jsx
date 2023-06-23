@@ -13,8 +13,11 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
+import { useNavigate  } from "react-router-dom";
+
 
 function Search() {
+  const navigate = useNavigate()
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
@@ -68,13 +71,12 @@ function Search() {
       setError("");
     }
   }, [errorOccurred]);
-
+  
   const fetchData = async () => {
     try {
       const skip = paginationModel.page * paginationModel.pageSize;
       const limit = paginationModel.pageSize;
       const search = form.search;
-      console.log(form.search);
       const response = await axios.get(API_BASE_URL + "/guardian", {
         params: {
           skip,
@@ -87,13 +89,10 @@ function Search() {
       });
       setData(response.data.listGuardian);
       setTotalRows(response.data.count);
-      console.log(response.data);
-      console.log("Yêu cầu đã được gửi thành công!");
       setLoading(false);
-      setErrorOccurred(false); // Đặt biến trạng thái lỗi về false khi thành công
+      setErrorOccurred(false); 
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      setErrorOccurred(true); // Đặt biến trạng thái lỗi thành true
+      setErrorOccurred(true); 
       setError(error);
     }
     setLoading(false);
@@ -186,10 +185,10 @@ function Search() {
                 color="primary"
                 onClick={handleSubmit}
                 sx={{ mr: 2 }}
-                disabled={loading} // Disable nút Search khi đang loading
+                disabled={loading} 
               >
                 {loading ? (
-                  <CircularProgress size={24} /> // Hiển thị CircularProgress khi đang loading
+                  <CircularProgress size={24} /> 
                 ) : (
                   "Search"
                 )}

@@ -129,7 +129,7 @@ function Search() {
     <>
       <Box m="1.5rem 2.5rem">
         <ToastContainer />
-        <Header title="GUARDIAN" subtitle="List Guardian" />
+        <Header title="PHARMACITY" subtitle="List Pharmacity" />
         <Box
           mt="40px"
           height="75vh"
