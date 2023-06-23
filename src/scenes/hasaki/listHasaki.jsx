@@ -73,7 +73,7 @@ function Search() {
       const skip = paginationModel.page * paginationModel.pageSize;
       const limit = paginationModel.pageSize;
       const search = form.search;
-      const response = await axios.get(API_BASE_URL + "/hasaki/", {
+      const response = await axios.get(API_BASE_URL + "/hasaki", {
         params: {
           skip,
           limit,

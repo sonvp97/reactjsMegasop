@@ -13,10 +13,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import {
-  LightModeOutlined,
-  DarkModeOutlined,
   Menu as MenuIcon,
-  Search,
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
@@ -39,7 +36,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate("/login"); 
+    navigate("/"); 
   }
 
   return (
