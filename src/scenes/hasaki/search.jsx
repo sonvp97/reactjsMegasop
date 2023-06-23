@@ -75,8 +75,10 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      const response = await axios.post(API_BASE_URL + "/hasaki", {
+      const response = await axios.post(API_BASE_URL + "/hasaki",  {
         s_links: selectedRows,
+      },
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

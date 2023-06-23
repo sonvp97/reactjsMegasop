@@ -79,8 +79,10 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post(API_BASE_URL + "/guardian", {
+      const response = await axios.post(API_BASE_URL + "/guardian",  {
         s_links: selectedRows,
+      },
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

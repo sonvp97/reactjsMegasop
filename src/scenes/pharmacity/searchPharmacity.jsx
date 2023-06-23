@@ -78,12 +78,16 @@ function Search() {
   const handleConfirm = async () => {
     try {
       // Gửi yêu cầu đến server
-      const response = await axios.post(API_BASE_URL + "/linkPharmacity", {
-        s_links: selectedRows,
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      const response = await axios.post(API_BASE_URL + "/linkPharmacity", 
+        {
+          s_links: selectedRows,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       console.log(response.data);
       if (response.data.message === "successful") {
         toast.success(

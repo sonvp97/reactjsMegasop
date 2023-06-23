@@ -84,8 +84,13 @@ function Search() {
         {
           s_links: selectedRows,
         },
-
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
       );
+      
       console.log(response.data);
       // Handle the response
       if (response.data.message === "successful") {
@@ -249,7 +254,7 @@ function Search() {
               );
               const selectedData = selectedRows.map((row) => ({
                 link: row.link,
-                id_watson: row.idWatson,
+                id_watson: parseInt(row.idWatson),
               }));
               console.log(selectedData)
               setSelectedRows(selectedData);
