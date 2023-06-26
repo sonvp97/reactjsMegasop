@@ -14,11 +14,20 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
+import { useNavigate  } from "react-router-dom";
 
 function Search() {
+  const navigate = useNavigate()
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   if (!authToken) {
+  //     navigate("/");
+  //   }
+  // }, []);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -73,7 +82,7 @@ function Search() {
       const skip = paginationModel.page * paginationModel.pageSize;
       const limit = paginationModel.pageSize;
       const search = form.search;
-      const response = await axios.get(API_BASE_URL + "/pharmacity/", {
+      const response = await axios.get(API_BASE_URL + "/pharmacity", {
         params: {
           skip,
           limit,

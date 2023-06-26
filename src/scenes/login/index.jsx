@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { themeSettings } from "theme";
 import { CircularProgress } from "@mui/material";
 import { API_BASE_URL } from "../api/api.jsx";
+import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -38,13 +39,12 @@ function Copyright(props) {
 }
 
 export default function Login() {
-  const [login, setLogin] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const authToken = JSON.parse(JSON.stringify(localStorage.getItem('token')))
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  
   const mode = useSelector((state) => state.global.mode);
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -71,6 +71,22 @@ export default function Login() {
     }
     setIsLoading(false);
   };
+  const checkToken = async () => {
+    try {
+      const response = await axios.post(API_BASE_URL + "/expired/",{
+        token: authToken
+      })
+      if (response.data) {
+        navigate("/hasaki/search"); 
+      }
+      console.log(response.data)
+      
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+    
+  };
+  checkToken()
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -16,8 +16,10 @@ import Header from "components/Header";
 import { API_BASE_URL } from "../api/api.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate  } from "react-router-dom";
 
 function Search() {
+  const navigate = useNavigate()
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
@@ -25,6 +27,12 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [open, setOpen] = useState(false);
+
+  // useEffect(() => {
+  //   if (!authToken) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const handleChange = (e) => {
     setForm({

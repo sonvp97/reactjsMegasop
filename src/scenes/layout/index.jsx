@@ -5,6 +5,8 @@ import { Outlet, Navigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../api/api.jsx";
+import { useNavigate  } from "react-router-dom";
+
 
 
 
@@ -12,27 +14,26 @@ function Layout() {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem('token')))
-  const [check, setCheck] = useState(true);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     checkToken()
-  })
+  },[])
   const checkToken = async () => {
+    
     try {
       const response = await axios.post(API_BASE_URL + "/expired/",{
         token: authToken
       })
       if (!response.data) {
-        setCheck(false)
+        navigate('/')
       }
+      console.log(response.data)
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
-      
     }
   };
-  if(!check){
-    return <Navigate to="/" />;
-  }
 
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">

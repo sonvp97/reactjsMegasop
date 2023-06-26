@@ -21,6 +21,13 @@ function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   if (!authToken) {
+  //     navigate("/");
+  //   }
+  // }, []);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -59,8 +66,6 @@ function Search() {
     fetchData();
   }, [paginationModel.page, paginationModel.pageSize, loading]);
 
-  // thêm một useEffect mới, được kích hoạt khi errorOccurred thay đổi. Nếu errorOccurred là true,
-  // tức là đã xảy ra lỗi, chúng ta hiển thị thông báo lỗi một lần duy nhất
   useEffect(() => {
     if (errorOccurred) {
       toast.error("Có lỗi xảy ra khi lấy dữ liệu từ database " + error, {
