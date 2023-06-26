@@ -86,7 +86,6 @@ function Search() {
         status,
         hour,
         minute,
-        
       },
       {
         headers: {

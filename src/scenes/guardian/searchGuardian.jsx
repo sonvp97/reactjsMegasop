@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
@@ -43,14 +44,15 @@ function Search() {
     if (form.search) {
       try {
         const response = await axios.get(
-          API_BASE_URL + "/guardian/" + form.search,{
+          API_BASE_URL + "/guardian/" + form.search,
+          {
             headers: {
               Authorization: `Bearer ${authToken}`,
             },
           }
         );
         setData(response.data);
-        setSelectedRows([])
+        setSelectedRowIds([]);
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
@@ -61,6 +63,7 @@ function Search() {
           autoClose: 3000,
           hideProgressBar: true,
         });
+      
       }
     } else if (form) {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -69,7 +72,6 @@ function Search() {
         hideProgressBar: true,
       });
     }
-
     setLoading(false);
   };
 
@@ -79,20 +81,21 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      const response = await axios.post(API_BASE_URL + "/guardian",  {
-        s_links: selectedRows,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      const response = await axios.post(
+        API_BASE_URL + "/guardian",
+        {
+          s_links: selectedRows,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       console.log(response.data);
       if (response.data.size !== 0) {
         toast.success(
-          "Bạn đã lưu " +
-            response.data.size +
-            " link thành công!",
+          "Bạn đã lưu " + response.data.size + " link thành công!",
           {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 3000,
@@ -200,8 +203,8 @@ function Search() {
             },
             "& .css-kg2jkk-MuiDataGrid-root": {
               maxWidth: "1189.2px",
-              maxHeight: "559.2px"
-            }
+              maxHeight: "559.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
@@ -222,20 +225,16 @@ function Search() {
                 color="primary"
                 onClick={handleSubmit}
                 sx={{ mr: 2 }}
-                disabled={loading} 
+                disabled={loading}
               >
-                {loading ? (
-                  <CircularProgress size={24} /> 
-                ) : (
-                  "Search"
-                )}
+                {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
-              <Button 
-               variant="contained" 
-               color="primary"
-               onClick={handleModal}
-               disabled={isButtonDisabled}
-               >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleModal}
+                disabled={isButtonDisabled}
+              >
                 Submit
               </Button>
             </Box>
@@ -252,12 +251,16 @@ function Search() {
             }}
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
+              setSelectedRowIds(ids)
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
+              const selectedRows = data.filter((row) =>
+                selectedIDs.has(row.id)
+              );
               const selectedLinks = selectedRows.map((row) => row.link);
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedLinks.length === 0);
             }}
+            rowSelectionModel={selectedRowIds}
           />
           <Modal open={open} onClose={handleClose}>
             <Box
@@ -275,11 +278,11 @@ function Search() {
               }}
             >
               <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                Confirm Save to Favorites
+                Xác nhận Lưu vào Mục yêu thích
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Are you sure you want to save the selected products to your
-                favorites?
+                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào mục yêu
+                thích của bạn không?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button

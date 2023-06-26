@@ -18,6 +18,7 @@ import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const theme = useTheme();
   const [form, setForm] = useState({});
@@ -48,6 +49,7 @@ function Search() {
           }
         );
         setData(response.data);
+        setSelectedRowIds([])
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
@@ -233,12 +235,12 @@ function Search() {
               >
                 {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
-              <Button 
-               variant="contained" 
-               color="primary"
-               onClick={handleModal}
-               disabled={isButtonDisabled}
-               >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleModal}
+                disabled={isButtonDisabled}
+              >
                 Submit
               </Button>
             </Box>
@@ -255,12 +257,16 @@ function Search() {
             }}
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
+              setSelectedRowIds(ids)
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
+              const selectedRows = data.filter((row) =>
+                selectedIDs.has(row.id)
+              );
               const selectedLinks = selectedRows.map((row) => row.link);
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedLinks.length === 0);
             }}
+            rowSelectionModel={selectedRowIds}
           />
         </Box>
         <Modal open={open} onClose={handleClose}>
@@ -279,11 +285,11 @@ function Search() {
             }}
           >
             <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-              Confirm Save to Favorites
+              Xác nhận Lưu vào Mục yêu thích
             </Typography>
             <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-              Are you sure you want to save the selected products to your
-              favorites?
+              Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào mục yêu thích
+              của bạn không?
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Button

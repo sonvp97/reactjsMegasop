@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.13.5",
     "@mui/x-data-grid": "^6.6.0",
+    "@mui/x-data-grid-pro": "^6.9.0",
     "@mui/x-date-pickers": "^5.0.20",
     "@nivo/line": "^0.80.0",
     "@nivo/pie": "^0.80.0",
