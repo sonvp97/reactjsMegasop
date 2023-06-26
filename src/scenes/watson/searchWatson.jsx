@@ -258,10 +258,15 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
-              const selectedLinks = selectedRows.map((row) => row.link);
-              setSelectedRows(selectedLinks);
-              setIsButtonDisabled(selectedLinks.length === 0);
+              const selectedRows = data.filter((row) =>
+                selectedIDs.has(row.id)
+              );
+              const selectedData = selectedRows.map((row) => ({
+                link: row.link,
+                id_watson: parseInt(row.idWatson),
+              }));
+              setSelectedRows(selectedData);
+              setIsButtonDisabled(selectedRows.length === 0);
             }}
           />
           <Modal open={open} onClose={handleClose}>

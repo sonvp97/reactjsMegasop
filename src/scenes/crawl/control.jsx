@@ -59,6 +59,13 @@ function Search() {
         }
       );
       console.log("Yêu cầu đã được gửi thành công!");
+      if (response.data === "success") {
+        toast.success("Tự động Crawl đã được bật", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
+      }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
@@ -184,7 +191,7 @@ function Search() {
             <Box sx={{ mb: 1 }}>
               <TextField
                 style={{ width: "100px" }}
-                label="Hour:"
+                label="Hour"
                 name="hour"
                 onChange={handleChange}
                 variant="outlined"
@@ -250,11 +257,10 @@ function Search() {
               }}
             >
               <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                Confirm Save to Favorites
+                Xác nhận để huỷ bỏ
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Are you sure you want to save the selected products to your
-                favorites?
+                Bạn có chắc chắn muốn tắt tự động lấy dữ liệu ?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button

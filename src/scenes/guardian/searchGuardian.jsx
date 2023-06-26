@@ -50,6 +50,7 @@ function Search() {
           }
         );
         setData(response.data);
+        setSelectedRows([])
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
@@ -78,7 +79,6 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      // Gửi yêu cầu đến server
       const response = await axios.post(API_BASE_URL + "/guardian",  {
         s_links: selectedRows,
       },

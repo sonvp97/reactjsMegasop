@@ -135,8 +135,8 @@ function Search() {
   };
   const columns = [
     {
-      field: "id",
-      headerName: "Id",
+      field: "stt",
+      headerName: "#",
       flex: 0.1,
     },
     {
