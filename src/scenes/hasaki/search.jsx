@@ -15,10 +15,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "../api/api.jsx";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Search() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
@@ -31,7 +31,7 @@ function Search() {
   //     navigate("/");
   //   }
   // }, []);
-  
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -85,14 +85,17 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      const response = await axios.post(API_BASE_URL + "/hasaki",  {
-        s_links: selectedRows,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      const response = await axios.post(
+        API_BASE_URL + "/hasaki",
+        {
+          s_links: selectedRows,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       console.log(response.data);
       if (response.data.message === "successful") {
         toast.success(
@@ -212,6 +215,10 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
+            "& .css-kg2jkk-MuiDataGrid-root": {
+              maxWidth: "1189.2px",
+              maxHeight: "559.2px"
+            }
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
@@ -241,27 +248,31 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-          <DataGrid
-            getRowId={(row) => row.id}
-            columns={columns}
-            rows={data}
-            checkboxSelection
-            disableRowSelectionOnClick
-            initialState={{
-              ...data.initialState,
-              pagination: { paginationModel: { pageSize: 10 } },
-            }}
-            pageSizeOptions={[10, 20, 30]}
-            onRowSelectionModelChange={(ids) => {
-              const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
-              const selectedLinks = selectedRows.map((row) => row.link);
-              setSelectedRows(selectedLinks);
-            }}
-          />
-          <Modal open={open} onClose={handleClose}>
+          {/* <Box sx={{ maxWidth: "1358px", height: "628px"}}> */}
+            <DataGrid
+              getRowId={(row) => row.id}
+              columns={columns}
+              rows={data}
+              checkboxSelection
+              disableRowSelectionOnClick
+              initialState={{
+                ...data.initialState,
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+              pageSizeOptions={[10, 20, 30]}
+              onRowSelectionModelChange={(ids) => {
+                const selectedIDs = new Set(ids);
+                const selectedRows = data.filter((row) =>
+                  selectedIDs.has(row.id)
+                );
+                const selectedLinks = selectedRows.map((row) => row.link);
+                setSelectedRows(selectedLinks);
+              }}
+            />
+          </Box>
+          
+        {/* </Box> */}
+        <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
                 position: "absolute",
@@ -302,7 +313,6 @@ function Search() {
               </Box>
             </Box>
           </Modal>
-        </Box>
       </Box>
     </>
   );
