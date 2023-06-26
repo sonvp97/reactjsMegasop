@@ -15,23 +15,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "../api/api.jsx";
-import { useNavigate } from "react-router-dom";
 
 function Search() {
-  const navigate = useNavigate();
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   if (!authToken) {
-  //     navigate("/");
-  //   }
-  // }, []);
-
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -97,11 +88,9 @@ function Search() {
         }
       );
       console.log(response.data);
-      if (response.data.message === "successful") {
+      if (response.data.size != 0) {
         toast.success(
-          "Bạn đã lưu tổng cộng " +
-            response.data.size +
-            " link trong cơ sở dữ liệu!",
+          "Bạn đã lưu " + response.data.size + " link thành công!",
           {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 3000,
@@ -109,7 +98,7 @@ function Search() {
           }
         );
       } else {
-        toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
+        toast.error("Link đã tồn tại!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,
@@ -217,8 +206,8 @@ function Search() {
             },
             "& .css-kg2jkk-MuiDataGrid-root": {
               maxWidth: "1189.2px",
-              maxHeight: "559.2px"
-            }
+              maxHeight: "559.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
@@ -248,71 +237,68 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-          {/* <Box sx={{ maxWidth: "1358px", height: "628px"}}> */}
-            <DataGrid
-              getRowId={(row) => row.id}
-              columns={columns}
-              rows={data}
-              checkboxSelection
-              disableRowSelectionOnClick
-              initialState={{
-                ...data.initialState,
-                pagination: { paginationModel: { pageSize: 10 } },
-              }}
-              pageSizeOptions={[10, 20, 30]}
-              onRowSelectionModelChange={(ids) => {
-                const selectedIDs = new Set(ids);
-                const selectedRows = data.filter((row) =>
-                  selectedIDs.has(row.id)
-                );
-                const selectedLinks = selectedRows.map((row) => row.link);
-                setSelectedRows(selectedLinks);
-              }}
-            />
-          </Box>
-          
-        {/* </Box> */}
+          <DataGrid
+            getRowId={(row) => row.id}
+            columns={columns}
+            rows={data}
+            checkboxSelection
+            disableRowSelectionOnClick
+            initialState={{
+              ...data.initialState,
+              pagination: { paginationModel: { pageSize: 10 } },
+            }}
+            pageSizeOptions={[10, 20, 30]}
+            onRowSelectionModelChange={(ids) => {
+              const selectedIDs = new Set(ids);
+              const selectedRows = data.filter((row) =>
+                selectedIDs.has(row.id)
+              );
+              const selectedLinks = selectedRows.map((row) => row.link);
+              setSelectedRows(selectedLinks);
+            }}
+          />
+        </Box>
         <Modal open={open} onClose={handleClose}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: 400,
-                bgcolor: theme.palette.primary[700],
-                borderRadius: 8,
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                p: 4,
-                textAlign: "center",
-              }}
-            >
-              <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                Confirm Save to Favorites
-              </Typography>
-              <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Are you sure you want to save the selected products to your
-                favorites?
-              </Typography>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={handleCancel}
-                  sx={{ mr: 2 }}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleConfirm}
-                >
-                  Confirm
-                </Button>
-              </Box>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: theme.palette.primary[700],
+              borderRadius: 8,
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+              p: 4,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+              Confirm Save to Favorites
+            </Typography>
+            <Typography variant="body1" component="p" sx={{ mb: 4 }}>
+              Are you sure you want to save the selected products to your
+              favorites?
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleCancel}
+                sx={{ mr: 2 }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleConfirm}
+              >
+                Confirm
+              </Button>
             </Box>
-          </Modal>
+          </Box>
+        </Modal>
       </Box>
     </>
   );

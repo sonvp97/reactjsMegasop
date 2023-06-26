@@ -166,8 +166,6 @@ function Search() {
               borderRadius: "50%",
             },
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
-              // CSS styles for checked checkbox input
-              // For example:
               color: "white",
             },
             "& .css-kg2jkk-MuiDataGrid-root": {
@@ -206,7 +204,6 @@ function Search() {
           </Grid>
           <DataGrid
             rows={data ? data : []}
-            // rows={data}
             columns={columns}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
