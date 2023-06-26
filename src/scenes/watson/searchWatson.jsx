@@ -131,8 +131,8 @@ function Search() {
   };
   const columns = [
     {
-      field: "id",
-      headerName: "Id",
+      field: "stt",
+      headerName: "#",
       flex: 0.1,
     },
     {
@@ -263,7 +263,7 @@ function Search() {
               );
               const selectedData = selectedRows.map((row) => ({
                 link: row.link,
-                id_watson: parseInt(row.idWatson),
+                id_watson: parseInt(row.id),
               }));
               setSelectedRows(selectedData);
               setIsButtonDisabled(selectedRows.length === 0);
