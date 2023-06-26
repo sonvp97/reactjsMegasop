@@ -99,11 +99,11 @@ function Search() {
         }
       );
       console.log(response.data);
-      if (response.data.message === "successful") {
+      if (response.data.size !== 0) {
         toast.success(
-          "Bạn đã lưu tổng cộng " +
+          "Bạn đã lưu " +
             response.data.size +
-            " link trong cơ sở dữ liệu!",
+            " link thành công!",
           {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 3000,
@@ -111,7 +111,7 @@ function Search() {
           }
         );
       } else {
-        toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
+        toast.error("Link đã tồn tại!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,

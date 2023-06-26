@@ -16,15 +16,14 @@ import Header from "components/Header";
 import { API_BASE_URL } from "../api/api.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate  } from "react-router-dom";
 
 function Search() {
-  const navigate = useNavigate()
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [selectedRows, setSelectedRows] = useState([]);
   const [open, setOpen] = useState(false);
   const handleChange = (e) => {
@@ -89,11 +88,11 @@ function Search() {
         },
       });
       console.log(response.data);
-      if (response.data.message === "successful") {
+      if (response.data.size !== 0) {
         toast.success(
-          "Bạn đã lưu tổng cộng " +
+          "Bạn đã lưu " +
             response.data.size +
-            " link trong cơ sở dữ liệu!",
+            " link thành công!",
           {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 3000,
@@ -101,7 +100,7 @@ function Search() {
           }
         );
       } else {
-        toast.error("Bạn đã lưu 1000 link, không thể lưu thêm!", {
+        toast.error("Link đã tồn tại!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,
@@ -231,7 +230,12 @@ function Search() {
                   "Search"
                 )}
               </Button>
-              <Button variant="contained" color="primary" onClick={handleModal}>
+              <Button 
+               variant="contained" 
+               color="primary"
+               onClick={handleModal}
+               disabled={isButtonDisabled}
+               >
                 Submit
               </Button>
             </Box>
@@ -249,11 +253,10 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
+              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
               const selectedLinks = selectedRows.map((row) => row.link);
               setSelectedRows(selectedLinks);
+              setIsButtonDisabled(selectedLinks.length === 0);
             }}
           />
           <Modal open={open} onClose={handleClose}>
