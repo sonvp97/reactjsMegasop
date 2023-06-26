@@ -16,10 +16,9 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
-import { useNavigate  } from "react-router-dom";
 
 function Search() {
-  const navigate = useNavigate()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const [form, setForm] = useState({});
@@ -247,7 +246,12 @@ function Search() {
               >
                 {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
-              <Button variant="contained" color="primary" onClick={handleModal}>
+              <Button 
+               variant="contained" 
+               color="primary"
+               onClick={handleModal}
+               disabled={isButtonDisabled}
+               >
                 Submit
               </Button>
             </Box>
@@ -265,11 +269,10 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
+              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
               const selectedLinks = selectedRows.map((row) => row.link);
               setSelectedRows(selectedLinks);
+              setIsButtonDisabled(selectedLinks.length === 0);
             }}
           />
           <Modal open={open} onClose={handleClose}>

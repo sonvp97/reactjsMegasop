@@ -18,6 +18,7 @@ import { API_BASE_URL } from "../api/api.jsx";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const theme = useTheme();
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
@@ -234,7 +235,12 @@ function Search() {
               >
                 {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
-              <Button variant="contained" color="primary" onClick={handleModal}>
+              <Button 
+               variant="contained" 
+               color="primary"
+               onClick={handleModal}
+               disabled={isButtonDisabled}
+               >
                 Submit
               </Button>
             </Box>
@@ -252,15 +258,10 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
               const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
-              const selectedData = selectedRows.map((row) => ({
-                link: row.link,
-                id_watson: parseInt(row.idWatson),
-              }));
-              console.log(selectedData)
-              setSelectedRows(selectedData);
+              const selectedRows = data.filter((row) => selectedIDs.has(row.id));
+              const selectedLinks = selectedRows.map((row) => row.link);
+              setSelectedRows(selectedLinks);
+              setIsButtonDisabled(selectedLinks.length === 0);
             }}
           />
           <Modal open={open} onClose={handleClose}>
