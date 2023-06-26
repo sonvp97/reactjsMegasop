@@ -206,7 +206,7 @@ function Search() {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
+                onClick={handleModal}
                 sx={{ ml: 2 }}
                 disabled={loading} // Disable nút Search khi đang loading
               >
@@ -275,6 +275,47 @@ function Search() {
                   variant="contained"
                   color="primary"
                   onClick={handleConfirm}
+                >
+                  Confirm
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
+
+          <Modal open={open} onClose={handleSubmit}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 400,
+                bgcolor: theme.palette.primary[700],
+                borderRadius: 8,
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                p: 4,
+                textAlign: "center",
+              }}
+            >
+              <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+                Xác nhận để bật tự động lấy dữ liệu
+              </Typography>
+              <Typography variant="body1" component="p" sx={{ mb: 4 }}>
+                Bạn có chắc chắn muốn hệ thống lấy dữ liệu {form.hour} giờ/lần?
+              </Typography>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={handleCancel}
+                  sx={{ mr: 2 }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
                 >
                   Confirm
                 </Button>
