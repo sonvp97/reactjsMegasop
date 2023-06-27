@@ -280,10 +280,10 @@ function Search() {
               }}
             >
               <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                Xác nhận Lưu vào Mục yêu thích
+                Xác nhận Lưu vào Danh sách
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào danh sách của bạn không?
+                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào danh sách không?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button

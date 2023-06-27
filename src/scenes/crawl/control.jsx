@@ -33,12 +33,16 @@ function Search() {
     try {
   
       const response = await axios.get(
-        API_BASE_URL + "/job-exist");
+        API_BASE_URL + "/job-exist",{
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
       console.log(response.data.status);
       if (response.data.status === "on") {
         setLoading(true)
         setNumber(response.data.schedule)
-        setTime(response.data.next_job)
+        setTime(response.data.next_time)
       }else{
         setLoading(false)
         setNumber(0)
@@ -228,7 +232,7 @@ function Search() {
                 size="small"
               />
             </Box>
-            <h4>Time : {time}</h4>
+            <h4>Next time : {time}</h4>
             <Box sx={{ mb: 3 }}>
               <Button variant="contained" color="primary" onClick={handleModal} disabled={!loading}>
                 OFF
