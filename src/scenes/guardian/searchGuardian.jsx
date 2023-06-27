@@ -142,7 +142,7 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      flex: 0.1,
     },
     {
       field: "link",
@@ -211,7 +211,7 @@ function Search() {
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                label="Search:"
+                label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"

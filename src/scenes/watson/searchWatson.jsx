@@ -218,7 +218,7 @@ function Search() {
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                label="Search:"
+                label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"

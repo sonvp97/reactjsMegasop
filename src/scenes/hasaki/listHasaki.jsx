@@ -101,8 +101,10 @@ function Search() {
   const columns = [
     {
       field: "id",
-      headerName: "Id",
+      headerName: "#",
       flex: 0.1,
+      align: "center",
+      headerAlign: "center"
     },
     {
       field: "name",
@@ -112,17 +114,17 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      flex: 0.2,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.3,
+      flex: 0.2,
     },
     {
       field: "status",
       headerName: "Status",
-      flex: 0.3,
+      flex: 0.2,
     },
   ];
 
@@ -173,7 +175,7 @@ function Search() {
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                label="Search:"
+                label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"
