@@ -52,9 +52,11 @@ function Search() {
         setData(response.data);
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
-        setSelectedRowIds([])
+        setSelectedRowIds([]);
       } catch (error) {
-        window.location.reload();
+        if (error.message === "Request failed with status code 403") {
+          window.location.reload();
+        }
       }
     } else {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -63,7 +65,7 @@ function Search() {
         hideProgressBar: true,
       });
     }
-    setIsButtonDisabled(true)
+    setIsButtonDisabled(true);
     setLoading(false);
   };
 
@@ -107,7 +109,9 @@ function Search() {
       }
       setOpen(false);
     } catch (error) {
-      window.location.reload();
+      if (error.message === "Request failed with status code 403") {
+        window.location.reload();
+      }
     }
   };
 
@@ -246,7 +250,7 @@ function Search() {
             }}
             pageSizeOptions={[10, 20, 30]}
             onRowSelectionModelChange={(ids) => {
-              setSelectedRowIds(ids)
+              setSelectedRowIds(ids);
               const selectedIDs = new Set(ids);
               const selectedRows = data.filter((row) =>
                 selectedIDs.has(row.id)
@@ -279,7 +283,8 @@ function Search() {
                 Xác nhận Lưu vào Danh sách
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào danh sách không?
+                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào danh sách
+                không?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button

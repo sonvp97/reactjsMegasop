@@ -13,11 +13,11 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +53,6 @@ function Search() {
   const theme = useTheme();
   const [data, setData] = useState([]);
 
-
   useEffect(() => {
     fetchData();
   }, [paginationModel.page, paginationModel.pageSize, loading]);
@@ -79,7 +78,9 @@ function Search() {
       console.log("Yêu cầu đã được gửi thành công!");
       setLoading(false);
     } catch (error) {
-      window.location.reload();
+      if (error.message === "Request failed with status code 403") {
+        window.location.reload();
+      }
     }
     setLoading(false);
   };
@@ -89,7 +90,7 @@ function Search() {
       headerName: "#",
       flex: 0.1,
       align: "center",
-      headerAlign: "center"
+      headerAlign: "center",
     },
     {
       field: "name",
@@ -152,8 +153,8 @@ function Search() {
             },
             "& .css-kg2jkk-MuiDataGrid-root": {
               maxWidth: "1189.2px",
-              maxHeight: "559.2px"
-            }
+              maxHeight: "559.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
