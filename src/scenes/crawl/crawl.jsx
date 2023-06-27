@@ -121,129 +121,50 @@ function Search() {
     }
     setLoading(false)
   };
-
-  const columns = [
-    {
-      field: "id",
-      headerName: "Id",
-      flex: 0.1,
-    },
-    {
-      field: "proxy",
-      headerName: "Proxy",
-      flex: 0.8,
-    },
-    {
-      field: "username",
-      headerName: "User Name",
-      flex: 0.3,
-    },
-    {
-      field: "password",
-      headerName: "Password",
-      flex: 0.3,
-    },
-    {
-      field: "country",
-      headerName: "Country",
-      flex: 0.3,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 1,
-    },
-  ];
+  const [isCrawlControlEnabled, setIsCrawlControlEnabled] = useState(false);
+  const handleCrawlControlClick = () => {
+    setIsCrawlControlEnabled(!isCrawlControlEnabled);
+  };
 
   return (
     <>
-      <Box m="1.5rem 2.5rem">
-        <ToastContainer />
-        <Header title="Crawl Control" subtitle="Edit cron job crawl" />
-        <Box
-          mt="40px"
-          height="75vh"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: theme.palette.primary.light,
-            },
-            "& .MuiDataGrid-footerContainer": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderTop: "none",
-            },
-            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-              color: `${theme.palette.secondary[200]} !important`,
-            },
-            "& .image": {
-              borderRadius: "50%",
-            },
-            "& .MuiDataGrid-checkboxInput.Mui-checked": {
-              color: "white",
-            },
-          }}
-        >
-          <Grid item xs={10} sm={8} md={6} lg={4}>
-            {/* <Box sx={{ mb: 3 }}>
-              <TextField
-                style={{ width: "100px" }}
-                label="Hour"
-                name="hour"
-                onChange={handleChange}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
+      <Box
+  display="flex"
+  alignItems="center"
+  justifyContent="center"
+  m="1.5rem 2.5rem"
+>
+  <Button variant="contained" color="primary" onClick={handleCrawlControlClick}>
+    Crawl Data
+  </Button>
+  {isCrawlControlEnabled && (
+    <Box sx={{ ml: "1rem", display: "flex", alignItems: "center" }}>
+      <TextField
+        style={{ width: "100px" }}
+        label="Hour"
+        name="hour"
+        onChange={handleChange}
+        variant="outlined"
+        size="small"
+        sx={{ mr: "0.5rem" }}
+      />
+      <Button variant="contained" color="primary" onClick={handleModal} sx={{ mr: "0.5rem" }}>
+        OFF
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleModalSubmit}
+        disabled={loading}
+      >
+        {loading ? <CircularProgress size={24} /> : "ON"}
+      </Button>
+    </Box>
+  )}
+</Box>
 
-            <Box sx={{ mb: 3 }}>
-              <Button variant="contained" color="primary" onClick={handleModal}>
-                OFF
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleModalSubmit}
-                sx={{ ml: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "ON"}
-              </Button>
-            </Box> */}
-            <h2 variant="contained" color="primary">
-              Proxy List
-            </h2>
-          </Grid>
-          <DataGrid
-            getRowId={(row) => row.id}
-            columns={columns}
-            rows={data}
-            checkboxSelection
-            disableRowSelectionOnClick
-            initialState={{
-              ...data.initialState,
-              pagination: { paginationModel: { pageSize: 10 } },
-            }}
-            pageSizeOptions={[10, 20, 30]}
-            onRowSelectionModelChange={(ids) => {
-              const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
-              const selectedLinks = selectedRows.map((row) => row.link);
-              setSelectedRows(selectedLinks);
-            }}
-          />
+
+
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
@@ -284,7 +205,6 @@ function Search() {
               </Box>
             </Box>
           </Modal>
-
           <Modal open={openModal} onClose={handleClose}>
             <Box
               sx={{
@@ -325,8 +245,6 @@ function Search() {
               </Box>
             </Box>
           </Modal>
-        </Box>
-      </Box>
     </>
   );
 }

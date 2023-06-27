@@ -70,7 +70,7 @@ function Search() {
         hideProgressBar: true,
       });
     }
-
+    setIsButtonDisabled(true)
     setLoading(false);
   };
   const [open, setOpen] = useState(false);
@@ -292,8 +292,7 @@ function Search() {
                 Xác nhận Lưu vào Mục yêu thích
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào mục yêu
-                thích của bạn không?
+                Bạn có chắc chắn muốn lưu những sản phẩm đã chọn vào danh sách của bạn không?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
