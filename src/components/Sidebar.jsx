@@ -139,7 +139,7 @@ const Sidebar = ({
       state: crawlOpen,
       children: [
         {
-          text: "Crawl Edit",
+          text: "Crawl Setting",
           icon: <AddCircleRounded />,
           link: "crawl/options",
         },

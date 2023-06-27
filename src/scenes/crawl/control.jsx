@@ -25,6 +25,7 @@ function Search() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [number, setNumber] = useState("");
+  const [time, setTime] = useState("");
   useEffect(() => {
     getStatus()
   }, []);
@@ -37,6 +38,7 @@ function Search() {
       if (response.data.status === "on") {
         setLoading(true)
         setNumber(response.data.schedule)
+        setTime(response.data.next_job)
       }else{
         setLoading(false)
         setNumber(0)
@@ -226,7 +228,7 @@ function Search() {
                 size="small"
               />
             </Box>
-
+            <h4>Time : {time}</h4>
             <Box sx={{ mb: 3 }}>
               <Button variant="contained" color="primary" onClick={handleModal} disabled={!loading}>
                 OFF
