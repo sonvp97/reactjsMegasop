@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "state";
 import FlexBetween from "./FlexBetween";
 import { useNavigate } from "react-router-dom";
-import Crawl from "../scenes/crawl/crawl";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -66,7 +65,6 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             </IconButton>
           </FlexBetween> */}
         </FlexBetween>
-        <Crawl/>
         <FlexBetween gap="1.5rem">
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />

@@ -24,7 +24,27 @@ function Search() {
   const [data, setData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [number, setNumber] = useState("");
+  useEffect(() => {
+    getStatus()
+  }, []);
+  const getStatus = async () => {
+    try {
+  
+      const response = await axios.get(
+        API_BASE_URL + "/job-exist");
+      console.log(response.data.status);
+      if (response.data.status === "on") {
+        setLoading(true)
+        setNumber(response.data.schedule)
+      }else{
+        setLoading(false)
+        setNumber(0)
+      }
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
 
   const handleChange = (e) => {
     setForm({
@@ -195,11 +215,12 @@ function Search() {
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-            {/* <Box sx={{ mb: 3 }}>
+            <Box sx={{ mb: 3 }}>
               <TextField
                 style={{ width: "100px" }}
                 label="Hour"
                 name="hour"
+                value={number}
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
@@ -219,7 +240,7 @@ function Search() {
               >
                 {loading ? <CircularProgress size={24} /> : "ON"}
               </Button>
-            </Box> */}
+            </Box>
             <h2 variant="contained" color="primary">
               Proxy List
             </h2>

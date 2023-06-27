@@ -14,7 +14,6 @@ import SearchGuardian from "scenes/guardian/searchGuardian";
 import SearchWatson from "scenes/watson/searchWatson";
 import ListWatson from "scenes/watson/listWatson";
 import CrawlControl from "scenes/crawl/control";
-import Crawl from "scenes/crawl/crawl";
 import Login from "scenes/login";
 
 function App() {
