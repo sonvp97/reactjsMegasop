@@ -26,6 +26,8 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [number, setNumber] = useState("");
   const [time, setTime] = useState("");
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     getStatus()
   }, []);
@@ -53,6 +55,7 @@ function Search() {
   }
 
   const handleChange = (e) => {
+    setNumber(e.target.value);
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -142,8 +145,9 @@ function Search() {
         });
       }
       setOpen(false);
+      setError(false)
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
+      setError(true)
     }
     setLoading(false)
   };
@@ -230,6 +234,8 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                error={error}
+                helperText={error ? 'Vui lòng nhập số lớn hơn 0!' : ''}
               />
             </Box>
             <h4>Next time : {time}</h4>
