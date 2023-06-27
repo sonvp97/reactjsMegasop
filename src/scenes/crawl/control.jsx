@@ -228,7 +228,7 @@ function Search() {
             </Box>
 
             <Box sx={{ mb: 3 }}>
-              <Button variant="contained" color="primary" onClick={handleModal}>
+              <Button variant="contained" color="primary" onClick={handleModal} disabled={!loading}>
                 OFF
               </Button>
               <Button
@@ -238,7 +238,7 @@ function Search() {
                 sx={{ ml: 2 }}
                 disabled={loading}
               >
-                {loading ? <CircularProgress size={24} /> : "ON"}
+                ON
               </Button>
             </Box>
             <h2 variant="contained" color="primary">
