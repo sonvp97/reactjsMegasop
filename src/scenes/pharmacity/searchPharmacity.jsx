@@ -56,12 +56,7 @@ function Search() {
         console.log("Yêu cầu đã được gửi thành công!");
         setSelectedRowIds([])
       } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        toast.error("Xuất hiện lỗi trong quá trình lấy dữ liệu " + error, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        window.location.reload();
       }
     } else {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -81,7 +76,6 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      // Gửi yêu cầu đến server
       const response = await axios.post(
         API_BASE_URL + "/linkPharmacity/",
         {
@@ -112,12 +106,7 @@ function Search() {
       }
       setOpen(false);
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      toast.error("Có lỗi xảy ra khi lưu link!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-        hideProgressBar: true,
-      });
+      window.location.reload();
     }
   };
   const handleModal = async () => {
@@ -208,8 +197,6 @@ function Search() {
               borderRadius: "50%",
             },
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
-              // CSS styles for checked checkbox input
-              // For example:
               color: "white",
             },
             "& .css-kg2jkk-MuiDataGrid-root": {

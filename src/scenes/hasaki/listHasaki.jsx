@@ -52,23 +52,11 @@ function Search() {
   const [totalRows, setTotalRows] = useState(0);
   const theme = useTheme();
   const [data, setData] = useState([]);
-  const [errorOccurred, setErrorOccurred] = useState(false);
-  const [error, setError] = useState("");
+
 
   useEffect(() => {
     fetchData();
   }, [paginationModel.page, paginationModel.pageSize, loading]);
-
-  useEffect(() => {
-    if (errorOccurred) {
-      toast.error("Có lỗi xảy ra khi lấy dữ liệu từ database " + error, {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-        hideProgressBar: true,
-      });
-      setError("");
-    }
-  }, [errorOccurred]);
 
   const fetchData = async () => {
     try {
@@ -90,11 +78,8 @@ function Search() {
       console.log(response.data);
       console.log("Yêu cầu đã được gửi thành công!");
       setLoading(false);
-      setErrorOccurred(false);
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      setErrorOccurred(true);
-      setError(error);
+      window.location.reload();
     }
     setLoading(false);
   };

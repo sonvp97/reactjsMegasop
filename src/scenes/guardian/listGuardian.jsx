@@ -74,7 +74,7 @@ function Search() {
       setTotalRows(response.data.count);
       setLoading(false);
     } catch (error) {
-      
+      window.location.reload();
     }
     setLoading(false);
   };

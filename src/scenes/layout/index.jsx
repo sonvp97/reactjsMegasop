@@ -18,8 +18,9 @@ function Layout() {
 
 
   useEffect(() => {
-    checkToken()
-  },[])
+    checkToken();
+  }, [authToken]);
+  
   const checkToken = async () => {
     
     try {

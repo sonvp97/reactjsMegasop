@@ -18,7 +18,6 @@ import { useSelector } from "react-redux";
 import { themeSettings } from "theme";
 import { CircularProgress } from "@mui/material";
 import { API_BASE_URL } from "../api/api.jsx";
-import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -86,7 +85,10 @@ export default function Login() {
     }
     
   };
-  checkToken()
+
+  useEffect(() => {
+  checkToken();
+}, []);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

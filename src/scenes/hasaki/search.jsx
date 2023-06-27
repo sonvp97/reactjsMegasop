@@ -53,13 +53,7 @@ function Search() {
         console.log(data);
         console.log("Yêu cầu đã được gửi thành công!");
       } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        toast.error("Xuất hiện lỗi trong quá trình lấy dữ liệu " + error, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        window.location.reload();
       }
     } else {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -110,12 +104,7 @@ function Search() {
       }
       setOpen(false);
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      toast.error("Có lỗi xảy ra khi lưu link!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-        hideProgressBar: true,
-      });
+      window.location.reload();
     }
   };
   const handleModal = async () => {

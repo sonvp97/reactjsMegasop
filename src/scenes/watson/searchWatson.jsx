@@ -54,13 +54,7 @@ function Search() {
         console.log("Yêu cầu đã được gửi thành công!");
         setSelectedRowIds([])
       } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        toast.error("Xuất hiện lỗi trong quá trình lấy dữ liệu " + error, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        window.location.reload();
       }
     } else {
       toast.error("Bạn vui lòng nhập từ khóa vào ô search!", {
@@ -82,7 +76,6 @@ function Search() {
   const handleConfirm = async () => {
     try {
       console.log(selectedRows);
-      // Send request to the server
       const response = await axios.post(
         API_BASE_URL + "/watsons",
         {
@@ -114,12 +107,7 @@ function Search() {
       }
       setOpen(false);
     } catch (error) {
-      console.error("Lỗi khi gửi yêu cầu:", error);
-      toast.error("Có lỗi xảy ra khi lưu link!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-        hideProgressBar: true,
-      });
+      window.location.reload();
     }
   };
 
