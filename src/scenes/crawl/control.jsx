@@ -55,7 +55,15 @@ function Search() {
   }
 
   const handleChange = (e) => {
-    setNumber(e.target.value);
+    const value = e.target.value;
+    if (value == ""){
+      setNumber("")
+    }else if (/^\d+$/.test(value) && parseInt(value) > 0) {
+      setNumber(value);
+    } else {
+      setNumber(1);
+    }
+    
     setForm({
       ...form,
       [e.target.name]: e.target.value,
