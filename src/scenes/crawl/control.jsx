@@ -47,7 +47,7 @@ function Search() {
         setTime(response.data.next_time)
       }else{
         setLoading(false)
-        setNumber(0)
+        setNumber(1)
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -56,12 +56,14 @@ function Search() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (value == ""){
+    if (value === ""){
       setNumber("")
     }else if (/^\d+$/.test(value) && parseInt(value) > 0) {
       setNumber(value);
+      setError(false)
     } else {
-      setNumber(1);
+      setError(true)
+      setNumber("");
     }
     
     setForm({
@@ -235,7 +237,7 @@ function Search() {
           <Grid item xs={10} sm={8} md={6} lg={4}>
             <Box sx={{ mb: 3 }}>
               <TextField
-                style={{ width: "100px" }}
+                style={{ width: "160px" }}
                 label="Hour"
                 name="hour"
                 value={number}
@@ -243,7 +245,8 @@ function Search() {
                 variant="outlined"
                 size="small"
                 error={error}
-                helperText={error ? 'Vui lòng nhập số lớn hơn 0!' : ''}
+                helperText={<div style={{ maxHeight: '3em', overflow: 'hidden' }}>{error ? 'Vui lòng nhập số lớn hơn 0!' : ''}</div>}
+
               />
             </Box>
             <h4>Next time : {time}</h4>
