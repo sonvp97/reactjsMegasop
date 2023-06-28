@@ -240,6 +240,7 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                disabled= {true}
                 error={error}
                 helperText={
                   <div style={{ maxHeight: "3em", overflow: "hidden" }}>
