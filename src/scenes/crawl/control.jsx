@@ -20,7 +20,6 @@ function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
   const navigate = useNavigate();
-  const [form, setForm] = useState({});
   const [data, setData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,54 +28,45 @@ function Search() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    getStatus()
+    getStatus();
   }, []);
   const getStatus = async () => {
     try {
-  
-      const response = await axios.get(
-        API_BASE_URL + "/job-exist",{
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+      const response = await axios.get(API_BASE_URL + "/job-exist", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
       console.log(response.data.status);
       if (response.data.status === "on") {
-        setLoading(true)
-        setNumber(response.data.schedule)
-        setTime(response.data.time_next)
-      }else{
-        setLoading(false)
-        setNumber(1)
+        setLoading(true);
+        setNumber(response.data.schedule);
+        setTime(response.data.time_next);
+      } else {
+        setLoading(false);
+        setNumber(1);
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
-  }
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (value === ""){
+    if (value === "") {
+      setError(true);
       setNumber("")
-    }else if (/^\d+$/.test(value) && parseInt(value) > 0) {
+    } else if (/^\d+$/.test(value) && parseInt(value) > 0) {
       setNumber(value);
-      setError(false)
-    } else {
-      setError(true)
-      setNumber("");
+      setError(false);
     }
-    
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
   };
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     try {
       const status = true;
-      const hour = parseInt(form.hour);
+      const hour = parseInt(number);
       const minute = 0;
       console.log(hour);
       const response = await axios.post(
@@ -155,11 +145,11 @@ function Search() {
         });
       }
       setOpen(false);
-      setError(false)
+      setError(false);
     } catch (error) {
-      setError(true)
+      setError(true);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const columns = [
@@ -245,13 +235,21 @@ function Search() {
                 variant="outlined"
                 size="small"
                 error={error}
-                helperText={<div style={{ maxHeight: '3em', overflow: 'hidden' }}>{error ? 'Vui lòng nhập số lớn hơn 0!' : ''}</div>}
-
+                helperText={
+                  <div style={{ maxHeight: "3em", overflow: "hidden" }}>
+                    {error ? "Vui lòng nhập số lớn hơn 0!" : ""}
+                  </div>
+                }
               />
             </Box>
             <h4>Next time : {time}</h4>
             <Box sx={{ mb: 3 }}>
-              <Button variant="contained" color="primary" onClick={handleModal} disabled={!loading}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleModal}
+                disabled={!loading}
+              >
                 OFF
               </Button>
               <Button
@@ -348,7 +346,7 @@ function Search() {
                 Xác nhận để bật tự động lấy dữ liệu
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Bạn có chắc chắn muốn tự động lấy dữ liệu {form.hour} giờ/lần ?
+                Bạn có chắc chắn muốn tự động lấy dữ liệu {number} giờ/lần ?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
