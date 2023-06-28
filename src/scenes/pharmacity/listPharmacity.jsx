@@ -81,6 +81,12 @@ function Search() {
     } catch (error) {
       if (error.message === "Request failed with status code 403") {
         window.location.reload();
+      } else {
+        toast.error(error.code, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     }
     setLoading(false);
