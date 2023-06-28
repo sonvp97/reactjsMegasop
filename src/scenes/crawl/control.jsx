@@ -23,13 +23,15 @@ function Search() {
   const [data, setData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isTime, setIsTime] = useState(false);
+
   const [number, setNumber] = useState("");
   const [time, setTime] = useState("");
   const [error, setError] = useState(false);
 
   useEffect(() => {
     getStatus();
-  }, []);
+  }, [isTime]);
   const getStatus = async () => {
     try {
       const response = await axios.get(API_BASE_URL + "/job-exist", {
@@ -43,8 +45,10 @@ function Search() {
         setNumber(response.data.schedule);
         setTime(response.data.time_next);
       } else {
+        setTime("")
+        setError(true)
         setLoading(false);
-        setNumber(1);
+        setNumber("");
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -82,6 +86,7 @@ function Search() {
           },
         }
       );
+      setIsTime(!isTime)
       console.log("Yêu cầu đã được gửi thành công!");
       if (response.data === "success") {
         toast.success("Tự động Crawl đã được bật", {
@@ -136,6 +141,7 @@ function Search() {
           },
         }
       );
+      setIsTime(!isTime)
       console.log(response.data);
       if (response.data === "deleted") {
         toast.success("Tự động Crawl đã được tắt", {
