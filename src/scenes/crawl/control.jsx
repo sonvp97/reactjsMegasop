@@ -243,7 +243,7 @@ function Search() {
                 error={error}
                 helperText={
                   <div style={{ maxHeight: "3em", overflow: "hidden" }}>
-                    {error ? "Vui lòng nhập số lớn hơn 0!" : ""}
+                    {error ? "Vui lòng nhập số lớn hơn 0." : ""}
                   </div>
                 }
               />
