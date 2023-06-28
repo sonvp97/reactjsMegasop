@@ -44,7 +44,7 @@ function Search() {
       if (response.data.status === "on") {
         setLoading(true)
         setNumber(response.data.schedule)
-        setTime(response.data.next_time)
+        setTime(response.data.time_next)
       }else{
         setLoading(false)
         setNumber(1)
