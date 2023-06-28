@@ -135,7 +135,7 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      flex: 0.1,
+      flex: 0.3,
     },
     {
       field: "link",

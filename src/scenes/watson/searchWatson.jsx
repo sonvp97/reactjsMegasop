@@ -136,12 +136,12 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      flex: 0.2,
+      flex: 0.3,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.2,
+      flex: 0.3,
     },
     {
       field: "link",
