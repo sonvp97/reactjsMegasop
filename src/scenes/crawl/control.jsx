@@ -158,38 +158,38 @@ function Search() {
     setLoading(false);
   };
 
-  const columns = [
-    {
-      field: "id",
-      headerName: "Id",
-      flex: 0.1,
-    },
-    {
-      field: "proxy",
-      headerName: "Proxy",
-      flex: 0.8,
-    },
-    {
-      field: "username",
-      headerName: "User Name",
-      flex: 0.3,
-    },
-    {
-      field: "password",
-      headerName: "Password",
-      flex: 0.3,
-    },
-    {
-      field: "country",
-      headerName: "Country",
-      flex: 0.3,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 1,
-    },
-  ];
+  // const columns = [
+  //   {
+  //     field: "id",
+  //     headerName: "Id",
+  //     flex: 0.1,
+  //   },
+  //   {
+  //     field: "proxy",
+  //     headerName: "Proxy",
+  //     flex: 0.8,
+  //   },
+  //   {
+  //     field: "username",
+  //     headerName: "User Name",
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     field: "password",
+  //     headerName: "Password",
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     field: "country",
+  //     headerName: "Country",
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     field: "status",
+  //     headerName: "Status",
+  //     flex: 1,
+  //   },
+  // ];
 
   return (
     <>
@@ -268,11 +268,11 @@ function Search() {
                 ON
               </Button>
             </Box>
-            <h2 variant="contained" color="primary">
+            {/* <h2 variant="contained" color="primary">
               Proxy List
-            </h2>
+            </h2> */}
           </Grid>
-          <DataGrid
+          {/* <DataGrid
             getRowId={(row) => row.id}
             columns={columns}
             rows={data}
@@ -291,7 +291,7 @@ function Search() {
               const selectedLinks = selectedRows.map((row) => row.link);
               setSelectedRows(selectedLinks);
             }}
-          />
+          /> */}
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
@@ -352,7 +352,7 @@ function Search() {
                 Xác nhận để bật tự động lấy dữ liệu
               </Typography>
               <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-                Bạn có chắc chắn muốn tự động lấy dữ liệu {number} giờ/lần ?
+                Bạn có chắc muốn tự động lấy dữ liệu?
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
