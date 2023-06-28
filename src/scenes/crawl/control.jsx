@@ -195,7 +195,7 @@ function Search() {
     <>
       <Box m="1.5rem 2.5rem">
         <ToastContainer />
-        <Header title="Crawl Control" subtitle="Edit cron job crawl" />
+        <Header title="Crawl Setting" />
         <Box
           mt="40px"
           height="75vh"
