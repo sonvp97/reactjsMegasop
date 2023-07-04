@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../api/api.jsx";

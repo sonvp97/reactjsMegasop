@@ -8,26 +8,19 @@ import {
   useTheme,
   Modal,
   Typography,
-  CircularProgress,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "scenes/api/api";
-import { useNavigate } from "react-router-dom";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
   const theme = useTheme();
-  const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isTime, setIsTime] = useState(false);
 
   const [number, setNumber] = useState("");
   const [time, setTime] = useState("");
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     getStatus();
@@ -46,7 +39,6 @@ function Search() {
         setTime(response.data.time_next);
       } else {
         setTime("")
-        setError(true)
         setLoading(false);
         setNumber("");
       }
@@ -58,11 +50,9 @@ function Search() {
   const handleChange = (e) => {
     const value = e.target.value;
     if (value === "") {
-      setError(true);
       setNumber("")
     } else if (/^\d+$/.test(value) && parseInt(value) > 0) {
       setNumber(value);
-      setError(false);
     }
   };
   const handleSubmit = async (e) => {
@@ -151,45 +141,10 @@ function Search() {
         });
       }
       setOpen(false);
-      setError(false);
     } catch (error) {
-      setError(true);
     }
     setLoading(false);
   };
-
-  // const columns = [
-  //   {
-  //     field: "id",
-  //     headerName: "Id",
-  //     flex: 0.1,
-  //   },
-  //   {
-  //     field: "proxy",
-  //     headerName: "Proxy",
-  //     flex: 0.8,
-  //   },
-  //   {
-  //     field: "username",
-  //     headerName: "User Name",
-  //     flex: 0.3,
-  //   },
-  //   {
-  //     field: "password",
-  //     headerName: "Password",
-  //     flex: 0.3,
-  //   },
-  //   {
-  //     field: "country",
-  //     headerName: "Country",
-  //     flex: 0.3,
-  //   },
-  //   {
-  //     field: "status",
-  //     headerName: "Status",
-  //     flex: 1,
-  //   },
-  // ];
 
   return (
     <>
@@ -241,12 +196,6 @@ function Search() {
                 variant="outlined"
                 size="small"
                 disabled= {true}
-                error={error}
-                helperText={
-                  <div style={{ maxHeight: "3em", overflow: "hidden" }}>
-                    {error ? "Vui lòng nhập số lớn hơn 0." : ""}
-                  </div>
-                }
               />
             </Box>
             <h4>Next time : {time}</h4>
@@ -269,30 +218,7 @@ function Search() {
                 ON
               </Button>
             </Box>
-            {/* <h2 variant="contained" color="primary">
-              Proxy List
-            </h2> */}
           </Grid>
-          {/* <DataGrid
-            getRowId={(row) => row.id}
-            columns={columns}
-            rows={data}
-            checkboxSelection
-            disableRowSelectionOnClick
-            initialState={{
-              ...data.initialState,
-              pagination: { paginationModel: { pageSize: 10 } },
-            }}
-            pageSizeOptions={[10, 20, 30]}
-            onRowSelectionModelChange={(ids) => {
-              const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
-              const selectedLinks = selectedRows.map((row) => row.link);
-              setSelectedRows(selectedLinks);
-            }}
-          /> */}
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{

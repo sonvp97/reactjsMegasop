@@ -115,6 +115,11 @@ function Search() {
       headerName: "Status",
       flex: 0.2,
     },
+    {
+      field: "crawl_time",
+      headerName: "Crawl Time",
+      flex: 0.2,
+    },
   ];
 
   return (
