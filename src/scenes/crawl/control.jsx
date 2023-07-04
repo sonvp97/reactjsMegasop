@@ -40,7 +40,7 @@ function Search() {
       } else {
         setTime("")
         setLoading(false);
-        setNumber("");
+        setNumber(8);
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
