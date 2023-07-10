@@ -112,7 +112,7 @@ function Search() {
       flex: 0.2,
     },
     {
-      field: "status",
+      field: "total",
       headerName: "Status",
       flex: 0.2,
     },
