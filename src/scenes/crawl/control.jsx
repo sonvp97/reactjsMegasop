@@ -13,6 +13,7 @@ import {
   FormControl,
   InputLabel,
   IconButton,
+  Link
 } from "@mui/material";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
@@ -273,6 +274,14 @@ function Search() {
       field: "name",
       headerName: "Name",
       flex: 0.8,
+      renderCell: (params) => (
+        <Link
+        href={params.value}
+        target="_blank"
+        rel="noopener"
+        sx={{ color: "white", textDecoration: "none" }}
+         style={{ whiteSpace: "pre-wrap" }}>{params.value}</Link>
+      ),
     },
     {
       field: "status",

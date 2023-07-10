@@ -271,7 +271,10 @@ function Search() {
               const selectedRows = data.filter((row) =>
                 selectedIDs.has(row.id)
               );
-              const selectedLinks = selectedRows.map((row) => row.link);
+              const selectedLinks = selectedRows.map((row) => ({
+                id: row.link,
+                link: `https://www.pharmacity.vn/${row.link}.html`
+              }));
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedLinks.length === 0);
             }}

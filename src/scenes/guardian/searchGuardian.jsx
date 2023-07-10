@@ -262,7 +262,10 @@ function Search() {
               const selectedRows = data.filter((row) =>
                 selectedIDs.has(row.id)
               );
-              const selectedLinks = selectedRows.map((row) => row.link);
+              const selectedLinks = selectedRows.map((row) => ({
+                id: row.link,
+                link: row.link
+              }));
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedLinks.length === 0);
             }}
