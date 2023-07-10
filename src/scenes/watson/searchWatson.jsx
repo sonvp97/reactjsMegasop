@@ -86,7 +86,7 @@ function Search() {
       console.log(selectedRows);
       setOpen(false);
       const response = await axios.post(
-        API_BASE_URL + "/link/",
+        API_BASE_URL + "/link",
         {
           s_links: selectedRows,
           id_brand: 4

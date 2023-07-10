@@ -276,7 +276,7 @@ function Search() {
     },
     {
       field: "status",
-      headerName: "Name",
+      headerName: "Status",
       flex: 0.2,
       valueGetter: (params) => statusNames[params.value] || "",
     },
