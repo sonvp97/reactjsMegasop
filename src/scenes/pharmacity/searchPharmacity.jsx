@@ -83,11 +83,13 @@ function Search() {
   };
 
   const handleConfirm = async () => {
+    setOpen(false);
     try {
       const response = await axios.post(
-        API_BASE_URL + "/linkPharmacity/",
+        API_BASE_URL + "/link/",
         {
           s_links: selectedRows,
+          id_brand: 2
         },
         {
           headers: {
@@ -112,7 +114,6 @@ function Search() {
           hideProgressBar: true,
         });
       }
-      setOpen(false);
     } catch (error) {
       if (error.message === "Request failed with status code 403") {
         window.location.reload();

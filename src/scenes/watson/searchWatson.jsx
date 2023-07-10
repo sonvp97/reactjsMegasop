@@ -84,10 +84,12 @@ function Search() {
   const handleConfirm = async () => {
     try {
       console.log(selectedRows);
+      setOpen(false);
       const response = await axios.post(
-        API_BASE_URL + "/watsons",
+        API_BASE_URL + "/link/",
         {
           s_links: selectedRows,
+          id_brand: 4
         },
         {
           headers: {
@@ -113,7 +115,6 @@ function Search() {
           hideProgressBar: true,
         });
       }
-      setOpen(false);
     } catch (error) {
       if (error.message === "Request failed with status code 403") {
         window.location.reload();
@@ -267,11 +268,8 @@ function Search() {
               const selectedRows = data.filter((row) =>
                 selectedIDs.has(row.id)
               );
-              const selectedData = selectedRows.map((row) => ({
-                link: row.link,
-                id_watson: parseInt(row.id),
-              }));
-              setSelectedRows(selectedData);
+              const selectedLinks = selectedRows.map((row) => row.id);
+              setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedRows.length === 0);
             }}
             rowSelectionModel={selectedRowIds}
