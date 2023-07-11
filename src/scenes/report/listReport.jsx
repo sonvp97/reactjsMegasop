@@ -42,7 +42,7 @@ function Search() {
 
   const theme = useTheme();
   const [report, setReport] = useState(false);
-  const [openReport, setOpenReport] = useState(false);
+  const [openReport, setOpenReport] = useState(true);
 
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -279,31 +279,37 @@ function Search() {
             "& .css-1vgpi90-MuiFormControl-root": {
               minWidth: "150px",
             },
+            "& .css-z35w7p": {
+              height: "40px",
+            },
           }}
         >
-          <Box sx={{ mr: 3, mb: 2 }}>
+          <Box sx={{ display: "flex", mr: 3, mb: 2 }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="From Date"
                 value={fromDate}
                 onChange={handleTime1Change}
                 renderInput={(params) => <TextField {...params} />}
-                format="yyyy-MM-dd HH:mm"
+                format="yyyy-MM-dd"
               />
               <DatePicker
                 label="To Date"
                 value={toDate}
                 onChange={handleTime2Change}
                 renderInput={(params) => <TextField {...params} />}
-                format="yyyy-MM-dd HH:mm"
+                format="yyyy-MM-dd"
               />
             </LocalizationProvider>
-            <IconButton onClick={handleSearchReport} sx={{ pt: 1.5 }}>
-              {loading ? (
-                <CircularProgress size={24} />
-              ) : (
-                <FilterAltIcon style={{ fontSize: 32 }} />
-              )}
+            <IconButton
+              onClick={handleSearchReport}
+              sx={{
+                top: -5,
+                width: 50,
+                height: 50,
+              }}
+            >
+              {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
             </IconButton>
           </Box>
           <DataGrid
@@ -336,27 +342,31 @@ function Search() {
               >
                 <CloseIcon />
               </IconButton>
-              <FormControl sx={{ mb: 2, minWidth: "150px", mt: 3 }}>
-                <InputLabel id="status-select-label">Status</InputLabel>
-                <Select
-                  labelId="status-select-label"
-                  id="status-select"
-                  label="Status"
-                  value={status}
-                  onChange={handleStatusChange}
+              <Box sx={{ display: "flex", mr: 3, mb: 2 }}>
+                <FormControl sx={{ mb: 2, minWidth: "150px", mt: 3 }}>
+                  <InputLabel id="status-select-label" sx={{ top: "-5px" }}>
+                    Status
+                  </InputLabel>
+                  <Select
+                    labelId="status-select-label"
+                    id="status-select"
+                    label="Status"
+                    value={status}
+                    sx={{ height: "40px" }}
+                    onChange={handleStatusChange}
+                  >
+                    <MenuItem value="">None</MenuItem>
+                    <MenuItem value="0">FAILURE</MenuItem>
+                    <MenuItem value="1">SUCCESS</MenuItem>
+                  </Select>
+                </FormControl>
+                <IconButton
+                  sx={{ width: 50, height: 50, top: 20 }}
+                  onClick={handleSearchReportDetail}
                 >
-                  <MenuItem value="">None</MenuItem>
-                  <MenuItem value="0">FAILURE</MenuItem>
-                  <MenuItem value="1">SUCCESS</MenuItem>
-                </Select>
-              </FormControl>
-              <IconButton onClick={handleSearchReportDetail} sx={{ pt: 4 }}>
-                {loading ? (
-                  <CircularProgress size={24} />
-                ) : (
-                  <FilterAltIcon style={{ fontSize: 32 }} />
-                )}
-              </IconButton>
+                  {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
+                </IconButton>
+              </Box>
               <DataGrid
                 rows={dataReport ? dataReport : []}
                 columns={columnReportDetail}
