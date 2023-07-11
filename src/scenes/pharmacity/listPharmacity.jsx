@@ -103,7 +103,7 @@ function Search() {
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      flex: 0.5,
     },
     {
       field: "price",

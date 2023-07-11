@@ -101,7 +101,7 @@ function Search() {
     {
       field: "name",
       headerName: "Name",
-      minWidth: 500,
+      minWidth: 450,
       maxWidth: 1500,
       renderCell: (params) => {
         return (

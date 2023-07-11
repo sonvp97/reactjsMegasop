@@ -101,7 +101,7 @@ function Search() {
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      flex: 0.5,
     },
     {
       field: "price",
@@ -116,7 +116,7 @@ function Search() {
     {
       field: "total",
       headerName: "Stock Level",
-      flex: 0.2,
+      flex: 0.1,
     },
     {
       field: "crawl_time",
