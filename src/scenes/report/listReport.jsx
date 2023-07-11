@@ -42,7 +42,7 @@ function Search() {
 
   const theme = useTheme();
   const [report, setReport] = useState(false);
-  const [openReport, setOpenReport] = useState(true);
+  const [openReport, setOpenReport] = useState(false);
 
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
