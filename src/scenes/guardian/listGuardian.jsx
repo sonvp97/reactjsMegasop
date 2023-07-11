@@ -190,7 +190,7 @@ function Search() {
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
             <Box display={"flex"} sx={{ mb: 3 }}>
-              <TextField
+            <TextField
                 fullWidth
                 label="Search"
                 name="search"
@@ -200,8 +200,8 @@ function Search() {
                 style={{width:200, minWidth: 200, maxWidth:800}}
                 onKeyDown={handleKeyDown}
               />
-              <IconButton onClick={handleSubmit} >
-                <FilterAltIcon />
+               <IconButton onClick={handleSubmit}>
+                {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
               </IconButton>
             </Box>
           </Grid>

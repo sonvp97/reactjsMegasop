@@ -180,8 +180,8 @@ function Search() {
                 style={{width:200, minWidth: 200, maxWidth:800}}
                 onKeyDown={handleKeyDown}
               />
-              <IconButton onClick={handleSubmit} >
-                <FilterAltIcon />
+               <IconButton onClick={handleSubmit}>
+                {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
               </IconButton>
             </Box>
           </Grid>

@@ -143,7 +143,7 @@ function Search() {
       headerName: "#",
       width:30,
       minWidth: 20,
-      maxWidth: 80,
+      maxWidth: 40,
     },
     {
       field: "name",
@@ -220,11 +220,11 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-1h9s6c4-MuiDataGrid-root": {
+            "& .MuiDataGrid-root--densityStandard": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
-            "& .css-7ieosi": {
+            "& .MuiGrid-item": {
               maxWidth: "1189.2px",
             },
           }}
