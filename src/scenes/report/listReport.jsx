@@ -200,6 +200,11 @@ function Search() {
       },
     },
     {
+      field: "total",
+      headerName: "Total Link",
+      flex: 0.2,
+    },
+    {
       field: "success",
       headerName: "Success",
       flex: 0.2,
@@ -217,11 +222,6 @@ function Search() {
     {
       field: "end_crawl",
       headerName: "End Crawl",
-      flex: 0.2,
-    },
-    {
-      field: "total",
-      headerName: "Total Link",
       flex: 0.2,
     },
   ];
