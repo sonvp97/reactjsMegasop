@@ -13,6 +13,8 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
+import IconButton from "@mui/material/IconButton";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
@@ -120,26 +122,26 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      minWidth: 150, 
+      minWidth: 150,
       maxWidth: 200,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      minWidth: 150, 
+      minWidth: 150,
       maxWidth: 200,
     },
     {
       field: "status",
       headerName: "Status",
-      minWidth: 150, 
+      minWidth: 150,
       maxWidth: 200,
     },
     {
       field: "crawl_time",
       headerName: "Crawl Time",
-      minWidth: 150, 
-      maxWidth: 200
+      minWidth: 150,
+      maxWidth: 200,
     },
   ];
 
@@ -187,7 +189,7 @@ function Search() {
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-            <Box sx={{ mb: 3 }}>
+            <Box display={"flex"} sx={{ mb: 3 }}>
               <TextField
                 fullWidth
                 label="Search"
@@ -195,19 +197,12 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                style={{width:200, minWidth: 200, maxWidth:800}}
                 onKeyDown={handleKeyDown}
               />
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                sx={{ mr: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Search"}
-              </Button>
+              <IconButton onClick={handleSubmit} >
+                <FilterAltIcon />
+              </IconButton>
             </Box>
           </Grid>
           <DataGrid
@@ -218,7 +213,6 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             rowCount={totalRows}
             paginationMode="server"
-            
           />
         </Box>
       </Box>

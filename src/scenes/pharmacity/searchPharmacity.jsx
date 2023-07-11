@@ -16,6 +16,9 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
+import IconButton from "@mui/material/IconButton";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function Search() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -137,6 +140,7 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
+      width:30,
       minWidth: 20,
       maxWidth: 80,
     },
@@ -149,19 +153,19 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      minWidth: 150,
+      minWidth: 100,
       maxWidth: 400,
     },
     {
       field: "originalPrice",
       headerName: "Original price",
-      minWidth: 150,
+      minWidth: 100,
       maxWidth: 400,
     },
     {
       field: "quantity",
       headerName: "Quantity",
-      minWidth: 150,
+      minWidth: 100,
       maxWidth: 400,
     },
     {
@@ -173,12 +177,17 @@ function Search() {
         const linkUrl = params.value;
         return (
           <Link
-            href={`https://www.pharmacity.vn/${linkUrl}.html`}
+          href={`https://www.pharmacity.vn/${linkUrl}.html`}
             target="_blank"
             rel="noopener"
-            sx={{ color: "white", textDecoration: "none" }}
+            sx={{
+              color: "white",
+              textDecoration: "none",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
-            https://www.pharmacity.vn/{linkUrl}.html
+             https://www.pharmacity.vn/{linkUrl}.html
           </Link>
         );
       },
@@ -226,10 +235,13 @@ function Search() {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
+            "& .css-7ieosi": {
+              maxWidth: "1189.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-            <Box sx={{ mb: 3 }}>
+          <Box sx={{ display: "flex", mb: 3 }}>
               <TextField
                 fullWidth
                 label="Search"
@@ -237,24 +249,19 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                style={{ width: 200, minWidth: 200, maxWidth: 800 }}
                 onKeyDown={handleKeyDown}
               />
-            </Box>
-            <Box sx={{ mb: 3 }}>
+              <IconButton onClick={handleSubmit}>
+                {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
+              </IconButton>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
-                sx={{ mr: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Search"}
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
+                style={{ marginLeft: "auto" }}
                 onClick={handleModal}
                 disabled={isButtonDisabled}
+                endIcon={<ChevronRightIcon />}
               >
                 Submit
               </Button>

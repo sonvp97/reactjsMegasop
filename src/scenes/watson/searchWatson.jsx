@@ -15,6 +15,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "../api/api.jsx";
+import IconButton from "@mui/material/IconButton";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
@@ -139,7 +142,8 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      minWidth: 20,
+      width:30,
+      minWidth: 10,
       maxWidth: 80,
     },
     {
@@ -151,32 +155,37 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      minWidth: 150,
+      minWidth: 100,
       maxWidth: 200,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      minWidth: 150,
+      minWidth: 100,
       maxWidth: 200,
     },
     {
       field: "link",
       headerName: "Link",
-      width: 830,
+      width: 800,
       minWidth: 500,
       maxWidth: 1000,
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
           <Link
-            href={linkUrl}
-            target="_blank"
-            rel="noopener"
-            sx={{ color: "white", textDecoration: "none", width:'100%' }}
-          >
-            {linkUrl}
-          </Link>
+          href={linkUrl}
+          target="_blank"
+          rel="noopener"
+          sx={{
+            color: "white",
+            textDecoration: "none",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {linkUrl}
+        </Link>
         );
       },
     },
@@ -223,10 +232,13 @@ function Search() {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
+            "& .css-7ieosi": {
+              maxWidth: "1189.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-            <Box sx={{ mb: 3 }}>
+          <Box sx={{ display: "flex", mb: 3 }}>
               <TextField
                 fullWidth
                 label="Search"
@@ -234,24 +246,19 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                style={{ width: 200, minWidth: 200, maxWidth: 800 }}
                 onKeyDown={handleKeyDown}
               />
-            </Box>
-            <Box sx={{ mb: 3 }}>
+              <IconButton onClick={handleSubmit}>
+                {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
+              </IconButton>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
-                sx={{ mr: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Search"}
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
+                style={{ marginLeft: "auto" }}
                 onClick={handleModal}
                 disabled={isButtonDisabled}
+                endIcon={<ChevronRightIcon />}
               >
                 Submit
               </Button>

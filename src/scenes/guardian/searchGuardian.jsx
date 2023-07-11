@@ -16,6 +16,9 @@ import Header from "components/Header";
 import { API_BASE_URL } from "../api/api.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import IconButton from "@mui/material/IconButton";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
@@ -88,7 +91,7 @@ function Search() {
         API_BASE_URL + "/link",
         {
           s_links: selectedRows,
-          id_brand: 3
+          id_brand: 3,
         },
         {
           headers: {
@@ -138,22 +141,27 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      flex: 0.1,
+      width:30,
+      minWidth: 20,
+      maxWidth: 80,
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      minWidth: 600,
+      maxWidth: 1000,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      minWidth: 100,
+      maxWidth: 200,
     },
     {
       field: "link",
       headerName: "Link",
-      flex: 1,
+      minWidth: 880,
+      maxWidth: 1500,
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
@@ -161,7 +169,12 @@ function Search() {
             href={linkUrl}
             target="_blank"
             rel="noopener"
-            sx={{ color: "white", textDecoration: "none" }}
+            sx={{
+              color: "white",
+              textDecoration: "none",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             {linkUrl}
           </Link>
@@ -207,14 +220,17 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-kg2jkk-MuiDataGrid-root": {
+            "& .css-1h9s6c4-MuiDataGrid-root": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
+            },
+            "& .css-7ieosi": {
+              maxWidth: "1189.2px",
             },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-            <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: "flex", mb: 3 }}>
               <TextField
                 fullWidth
                 label="Search"
@@ -222,24 +238,19 @@ function Search() {
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                style={{ width: 200, minWidth: 200, maxWidth: 800 }}
                 onKeyDown={handleKeyDown}
               />
-            </Box>
-            <Box sx={{ mb: 3 }}>
+              <IconButton onClick={handleSubmit}>
+                {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
+              </IconButton>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
-                sx={{ mr: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Search"}
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
+                style={{ marginLeft: "auto" }}
                 onClick={handleModal}
                 disabled={isButtonDisabled}
+                endIcon={<ChevronRightIcon />}
               >
                 Submit
               </Button>
@@ -264,7 +275,7 @@ function Search() {
               );
               const selectedLinks = selectedRows.map((row) => ({
                 name: row.link,
-                link: row.link
+                link: row.link,
               }));
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedLinks.length === 0);

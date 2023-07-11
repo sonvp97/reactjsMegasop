@@ -13,6 +13,8 @@ import Header from "components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_BASE_URL } from "../api/api.jsx";
+import IconButton from "@mui/material/IconButton";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
@@ -160,7 +162,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-kg2jkk-MuiDataGrid-root": {
+            "& .css-1h9s6c4-MuiDataGrid-root": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
@@ -168,26 +170,19 @@ function Search() {
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
             <Box sx={{ mb: 3 }}>
-              <TextField
+            <TextField
                 fullWidth
                 label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
+                style={{width:200, minWidth: 200, maxWidth:800}}
                 onKeyDown={handleKeyDown}
               />
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                sx={{ mr: 2 }}
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Search"}
-              </Button>
+              <IconButton onClick={handleSubmit} >
+                <FilterAltIcon />
+              </IconButton>
             </Box>
           </Grid>
           <DataGrid
