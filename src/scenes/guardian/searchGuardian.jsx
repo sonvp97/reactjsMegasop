@@ -263,7 +263,7 @@ function Search() {
                 selectedIDs.has(row.id)
               );
               const selectedLinks = selectedRows.map((row) => ({
-                id: row.link,
+                name: row.link,
                 link: row.link
               }));
               setSelectedRows(selectedLinks);

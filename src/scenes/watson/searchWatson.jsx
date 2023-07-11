@@ -139,27 +139,33 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      flex: 0.1,
+      minWidth: 20,
+      maxWidth: 80,
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      minWidth: 400,
+      maxWidth: 800,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      minWidth: 150,
+      maxWidth: 200,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.3,
+      minWidth: 150,
+      maxWidth: 200,
     },
     {
       field: "link",
       headerName: "Link",
-      flex: 1,
+      width: 830,
+      minWidth: 500,
+      maxWidth: 1000,
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
@@ -167,7 +173,7 @@ function Search() {
             href={linkUrl}
             target="_blank"
             rel="noopener"
-            sx={{ color: "white", textDecoration: "none" }}
+            sx={{ color: "white", textDecoration: "none", width:'100%' }}
           >
             {linkUrl}
           </Link>
@@ -213,7 +219,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-kg2jkk-MuiDataGrid-root": {
+            "& .css-1h9s6c4-MuiDataGrid-root": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
@@ -269,13 +275,14 @@ function Search() {
                 selectedIDs.has(row.id)
               );
               const selectedLinks = selectedRows.map((row) => ({
-                id: row.id,
+                name: row.id,
                 link: row.link
               }));
               setSelectedRows(selectedLinks);
               setIsButtonDisabled(selectedRows.length === 0);
             }}
             rowSelectionModel={selectedRowIds}
+            columnBuffer={10}
           />
           <Modal open={open} onClose={handleClose}>
             <Box

@@ -91,34 +91,55 @@ function Search() {
     {
       field: "id",
       headerName: "#",
-      flex: 0.1,
       align: "center",
       headerAlign: "center",
+      minWidth: 20,
+      maxWidth: 80,
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      minWidth: 500,
+      maxWidth: 1500,
+      renderCell: (params) => {
+        return (
+          <div
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              width: "100%",
+            }}
+            title={params.value}
+          >
+            {params.value}
+          </div>
+        );
+      },
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.2,
+      minWidth: 150, 
+      maxWidth: 200,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.2,
+      minWidth: 150, 
+      maxWidth: 200,
     },
     {
       field: "status",
       headerName: "Status",
-      flex: 0.2,
+      minWidth: 150, 
+      maxWidth: 200,
     },
     {
       field: "crawl_time",
       headerName: "Crawl Time",
-      flex: 0.2,
+      minWidth: 150, 
+      maxWidth: 200
     },
   ];
 
@@ -159,7 +180,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-kg2jkk-MuiDataGrid-root": {
+            "& .css-1h9s6c4-MuiDataGrid-root": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
@@ -197,6 +218,7 @@ function Search() {
             pageSizeOptions={[10, 20, 30]}
             rowCount={totalRows}
             paginationMode="server"
+            
           />
         </Box>
       </Box>

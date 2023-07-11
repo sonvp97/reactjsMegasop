@@ -135,32 +135,38 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      flex: 0.1,
+      minWidth: 20,
+      maxWidth: 40,
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      minWidth: 400,
+      maxWidth: 600,
     },
     {
       field: "brand_name",
       headerName: "Brand Name",
-      flex: 0.3,
+      minWidth: 120,
+      maxWidth: 200,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      minWidth: 100,
+      maxWidth: 200,
     },
     {
       field: "quantity",
       headerName: "Sold Items",
-      flex: 0.3,
+      minWidth: 100,
+      maxWidth: 200,
     },
     {
       field: "link",
       headerName: "Link",
-      flex: 1,
+      minWidth: 700,
+      maxWidth: 1500,
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
@@ -214,7 +220,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-kg2jkk-MuiDataGrid-root": {
+            "& .css-1h9s6c4-MuiDataGrid-root": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
@@ -270,7 +276,7 @@ function Search() {
                 selectedIDs.has(row.id)
               );
               const selectedLinks = selectedRows.map((row) => ({
-                id: row.link,
+                name: row.link,
                 link: row.link
               }));
               setSelectedRows(selectedLinks);
