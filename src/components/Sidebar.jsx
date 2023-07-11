@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Collapse,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -14,30 +13,17 @@ import {
   useTheme,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
-  HomeOutlined,
   ShoppingCartOutlined,
-  Groups2Outlined,
-  ReceiptLongOutlined,
-  PointOfSaleOutlined,
-  TodayOutlined,
-  CalendarMonthOutlined,
-  AdminPanelSettingsOutlined,
-  TrendingUpOutlined,
-  PieChartOutlined,
   ExpandMore,
-  MenuBookRounded,
   AddCircleRounded,
   ListAltRounded,
-  Person4Outlined,
   SearchRounded,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import profileImage from "assets/profile.jpeg";
 
 const Sidebar = ({
   user,
@@ -55,6 +41,8 @@ const Sidebar = ({
   const [guardianOpen, setGuardian] = useState(false);
   const [watsonOpen, setWatsonOpen] = useState(false);
   const [crawlOpen, setCrawlOpen] = useState(false);
+  const [reportlOpen, setReportlOpen] = useState(false);
+
 
   const navItems = [
     {
@@ -145,10 +133,25 @@ const Sidebar = ({
         },
       ],
     },
+    {
+      text: "Report",
+      icon: <ShoppingCartOutlined />,
+      state: reportlOpen,
+      children: [
+        {
+          text: "List Report",
+          icon: <ListAltRounded />,
+          link: "report",
+        },
+      ],
+    },
   ];
 
   const handleHasakiDropDown = () => {
     setHasakiOpen(!hasakiOpen);
+  };
+  const handleReportDropDown = () => {
+    setReportlOpen(!reportlOpen);
   };
   const handlePharmacityDropDown = () => {
     setPharmacityOpen(!pharmacityOpen);
@@ -241,6 +244,8 @@ const Sidebar = ({
                               handleWatsonDropDown();
                             } else if (text === "Crawl") {
                               handleCrawlDropDown();
+                            } else if (text === "Report") {
+                              handleReportDropDown();
                             }
                           }
                         }}

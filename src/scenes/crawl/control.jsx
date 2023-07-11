@@ -26,58 +26,17 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
-  const [data, setData] = useState([]);
-  const [paginationModel, setPaginationModel] = React.useState({
-    pageSize: 10,
-    page: 0,
-  });
-  const [dataReport, setDataReport] = useState([]);
-  const [paginationModelReport, setPaginationModelReport] = React.useState({
-    pageSize: 10,
-    page: 0,
-  });
-  const [totalRows, setTotalRows] = useState(0);
-  const [totalRowReport, setTotalRowReport] = useState(0);
-  const [idDetail, setIdDetail] = useState("");
-
-
   const theme = useTheme();
   const [loading, setLoading] = useState(false);
   const [isTime, setIsTime] = useState(false);
-  const [report, setReport] = useState(false);
-  const [openReport, setOpenReport] = useState(false);
   const [number, setNumber] = useState(8);
   const [time, setTime] = useState("");
 
-  const [fromDate, setFromDate] = useState(new Date());
-  const [toDate, setToDate] = useState(new Date());
-  const [status, setStatus] = useState("");
 
-  const handleStatusChange = (event) => {
-    setStatus(event.target.value);
-  };
-
-  const handleTime1Change = (newValue) => {
-    setFromDate(newValue.$d);
-  };
   
-  const handleSearchReportDetail = () => {
-     handleBrandClick(idDetail) 
-  };
-  const handleTime2Change = (newValue) => {
-    setToDate(newValue.$d);
-  };
   useEffect(() => {
     getStatus();
   }, [isTime]);
-  useEffect(() => {
-    getListReport();
-  }, [paginationModel.page, paginationModel.pageSize, report]);
-  useEffect(() => {
-    if(openReport){
-      handleBrandClick(idDetail);
-    }
-  }, [paginationModelReport.page, paginationModelReport.pageSize]);
   const getStatus = async () => {
     try {
       const response = await axios.get(API_BASE_URL + "/job-exist", {
@@ -98,31 +57,6 @@ function Search() {
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
-  };
-  const getListReport = async () => {
-    try {
-      const skip = paginationModel.page * paginationModel.pageSize;
-      const limit = paginationModel.pageSize;
-      const from_date = fromDate;
-      const to_date = toDate;
-      const response = await axios.get(API_BASE_URL + "/report", {
-        params: {
-          from_date,
-          to_date,
-          skip,
-          limit,
-        },
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      console.log(response.data);
-      setData(response.data.listReport);
-      setTotalRows(response.data.count);
-    } catch (error) {}
-  };
-  const handleSearchReport = (e) => {
-    setReport(!report);
   };
 
   const handleChange = (e) => {
@@ -180,10 +114,6 @@ function Search() {
     setOpenModal(true);
   };
 
-  const handleCloseReport = async () => {
-    setOpenReport(false);
-    setStatus("")
-  };
   const handleCancelModal = async () => {
     setOpenModal(false);
   };
@@ -193,32 +123,6 @@ function Search() {
   };
   const handleClose = () => {
     setOpen(false);
-  };
-  const handleBrandClick = async (id) => {
-    setOpenReport(true);
-    setIdDetail(id)
-    const clickedObject = data.find((item) => item.id === id);
-    try {
-      const skip = paginationModelReport.page * paginationModelReport.pageSize;
-      const limit = paginationModelReport.pageSize;
-      const report_id = clickedObject.report_id;
-    const brand_id = clickedObject.brand_id;
-      const response = await axios.get(API_BASE_URL + "/report/detail", {
-        params: {
-          skip,
-          limit,
-          report_id,
-          status,
-          brand_id,
-        },
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      console.log(response.data.listReportDetail);
-      setDataReport(response.data.listReportDetail);
-      setTotalRowReport(response.data.count);
-    } catch (error) {}
   };
 
   const handleConfirm = async () => {
@@ -252,94 +156,6 @@ function Search() {
     } catch (error) {}
     setLoading(false);
   };
-  const brandNames = {
-    1: "Hasaki",
-    2: "Pharmacity",
-    3: "Guardian",
-    4: "Watson",
-  };
-  const statusNames = {
-    0: "FAILURE",
-    1: "SUCCESS",
-  };
-  const columnReportDetail = [
-    {
-      field: "id",
-      headerName: "#",
-      flex: 0.1,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 0.8,
-      renderCell: (params) => (
-        <Link
-        href={params.value}
-        target="_blank"
-        rel="noopener"
-        sx={{ color: "white", textDecoration: "none" }}
-         style={{ whiteSpace: "pre-wrap" }}>{params.value}</Link>
-      ),
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 0.2,
-      valueGetter: (params) => statusNames[params.value] || "",
-    },
-    {
-      field: "time",
-      headerName: "Crawl Time",
-      flex: 0.3,
-    },
-  ];
-  const columns = [
-    {
-      field: "id",
-      headerName: "#",
-      flex: 0.1,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "brand_id",
-      headerName: "Name Brand",
-      flex: 0.2,
-      renderCell: (params) => {
-        const brandName = brandNames[params.value] || "";
-        return (
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => handleBrandClick(params.id)}
-          >
-            {brandName}
-          </div>
-        );
-      },
-    },
-    {
-      field: "success",
-      headerName: "Success",
-      flex: 0.2,
-    },
-    {
-      field: "failure",
-      headerName: "Failure",
-      flex: 0.2,
-    },
-    {
-      field: "start_crawl",
-      headerName: "Start Crawl",
-      flex: 0.2,
-    },
-    {
-      field: "end_crawl",
-      headerName: "End Crawl",
-      flex: 0.2,
-    },
-  ];
 
   return (
     <>
@@ -431,42 +247,6 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-          <Box sx={{ mr: 3 }}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="From Date"
-                value={fromDate}
-                onChange={handleTime1Change}
-                renderInput={(params) => <TextField {...params} />}
-                format="yyyy-MM-dd HH:mm"
-              />
-              <DatePicker
-                label="To Date"
-                value={toDate}
-                onChange={handleTime2Change}
-                renderInput={(params) => <TextField {...params} />}
-                format="yyyy-MM-dd HH:mm"
-              />
-            </LocalizationProvider>
-          </Box>
-          <Box sx={{ mt: 1, mb: 1}}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSearchReport}
-            >
-              Search
-            </Button>
-          </Box>
-          <DataGrid
-            rows={data ? data : []}
-            columns={columns}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            pageSizeOptions={[10, 20, 30]}
-            rowCount={totalRows}
-            paginationMode="server"
-          />
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
@@ -545,64 +325,6 @@ function Search() {
                   Confirm
                 </Button>
               </Box>
-            </Box>
-          </Modal>
-          <Modal open={openReport} onClose={handleCloseReport}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                width: "100%",
-                maxWidth: "1000px",
-                bgcolor: theme.palette.primary[700],
-                borderRadius: "8px 0 0 0",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                p: 4,
-              }}
-            >
-              <IconButton
-      sx={{ position: "absolute", top: 0, right: 0 }}
-      onClick={handleCloseReport}
-    >
-      <CloseIcon />
-    </IconButton>
-              <FormControl sx={{ mb: 2,minWidth:"150px" }}>
-                <InputLabel id="status-select-label">Status</InputLabel>
-                <Select
-                  labelId="status-select-label"
-                  id="status-select"
-                  label="Status"
-                  value={status}
-                  onChange={handleStatusChange}
-                >
-                  <MenuItem value="">None</MenuItem>
-                  <MenuItem value="0">FAILURE</MenuItem>
-                  <MenuItem value="1">SUCCESS</MenuItem>
-                </Select>
-              </FormControl>
-              <Box sx={{ mb: 2 }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSearchReportDetail}
-                >
-                  Search
-                </Button>
-              </Box>
-              <DataGrid
-                rows={dataReport ? dataReport : []}
-                columns={columnReportDetail}
-                paginationModel={paginationModelReport}
-                onPaginationModelChange={setPaginationModelReport}
-                pageSizeOptions={[10, 20, 30]}
-                rowCount={totalRowReport}
-                paginationMode="server"
-                sx={{
-                  maxHeight: "500px",
-                  maxWidth: "1000px"
-                }}
-              />
             </Box>
           </Modal>
         </Box>

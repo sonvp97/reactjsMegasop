@@ -15,6 +15,8 @@ import SearchWatson from "scenes/watson/searchWatson";
 import ListWatson from "scenes/watson/listWatson";
 import CrawlControl from "scenes/crawl/control";
 import Login from "scenes/login";
+import Report from "scenes/report/listReport";
+
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -37,6 +39,7 @@ function App() {
               <Route path="/watson/search" element={<SearchWatson />} />
               <Route path="/watson" element={<ListWatson />} />
               <Route path="crawl/options" element={<CrawlControl />} />
+              <Route path="report" element={<Report />} />
             </Route>
           </Routes>
         </ThemeProvider>

@@ -164,7 +164,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            ".css-1h9s6c4-MuiDataGrid-root": {
+            "& .MuiDataGrid-root--densityStandard": {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },

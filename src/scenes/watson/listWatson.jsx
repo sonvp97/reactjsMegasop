@@ -162,10 +162,6 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            ".css-1h9s6c4-MuiDataGrid-root": {
-              maxWidth: "1189.2px",
-              maxHeight: "559.2px",
-            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>

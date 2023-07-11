@@ -92,7 +92,7 @@ function Search() {
         API_BASE_URL + "/link",
         {
           s_links: selectedRows,
-          id_brand: 4
+          id_brand: 4,
         },
         {
           headers: {
@@ -142,50 +142,48 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      width:30,
-      minWidth: 10,
-      maxWidth: 80,
+      flex: 0.1,
+      align: "center",
+      headerAlign: "center",
     },
     {
       field: "name",
       headerName: "Name",
-      minWidth: 400,
-      maxWidth: 800,
+      flex: 1,
     },
     {
       field: "price",
       headerName: "Price",
-      minWidth: 100,
-      maxWidth: 200,
+      flex: 0.3,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      minWidth: 100,
-      maxWidth: 200,
+      flex: 0.3
     },
     {
       field: "link",
       headerName: "Link",
-      width: 800,
-      minWidth: 500,
-      maxWidth: 1000,
+      flex: 2,
+      minWidth: 1000,
+      whiteSpace: "nowrap",
       renderCell: (params) => {
         const linkUrl = params.value;
         return (
           <Link
-          href={linkUrl}
-          target="_blank"
-          rel="noopener"
-          sx={{
-            color: "white",
-            textDecoration: "none",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {linkUrl}
-        </Link>
+            href={linkUrl}
+            target="_blank"
+            rel="noopener"
+            sx={{
+              color: "white",
+              textDecoration: "none",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {linkUrl}
+          </Link>
         );
       },
     },
@@ -238,7 +236,7 @@ function Search() {
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-          <Box sx={{ display: "flex", mb: 3 }}>
+            <Box sx={{ display: "flex", mb: 3 }}>
               <TextField
                 fullWidth
                 label="Search"
@@ -264,33 +262,32 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-          <DataGrid
-            getRowId={(row) => row.id}
-            columns={columns}
-            rows={data}
-            checkboxSelection
-            disableRowSelectionOnClick
-            initialState={{
-              ...data.initialState,
-              pagination: { paginationModel: { pageSize: 10 } },
-            }}
-            pageSizeOptions={[10, 20, 30]}
-            onRowSelectionModelChange={(ids) => {
-              setSelectedRowIds(ids);
-              const selectedIDs = new Set(ids);
-              const selectedRows = data.filter((row) =>
-                selectedIDs.has(row.id)
-              );
-              const selectedLinks = selectedRows.map((row) => ({
-                name: row.id,
-                link: row.link
-              }));
-              setSelectedRows(selectedLinks);
-              setIsButtonDisabled(selectedRows.length === 0);
-            }}
-            rowSelectionModel={selectedRowIds}
-            columnBuffer={10}
-          />
+            <DataGrid
+              getRowId={(row) => row.id}
+              columns={columns}
+              rows={data}
+              checkboxSelection
+              disableRowSelectionOnClick
+              initialState={{
+                ...data.initialState,
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+              pageSizeOptions={[10, 20, 30]}
+              onRowSelectionModelChange={(ids) => {
+                setSelectedRowIds(ids);
+                const selectedIDs = new Set(ids);
+                const selectedRows = data.filter((row) =>
+                  selectedIDs.has(row.id)
+                );
+                const selectedLinks = selectedRows.map((row) => ({
+                  name: row.id,
+                  link: row.link,
+                }));
+                setSelectedRows(selectedLinks);
+                setIsButtonDisabled(selectedRows.length === 0);
+              }}
+              rowSelectionModel={selectedRowIds}
+            />
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
