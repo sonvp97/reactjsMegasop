@@ -142,30 +142,29 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      flex: 0.1,
+      minWidth:50,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      minWidth:400,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      minWidth:100
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.3
+      minWidth:100
     },
     {
       field: "link",
       headerName: "Link",
-      flex: 2,
-      minWidth: 1000,
+      minWidth: 850,
       whiteSpace: "nowrap",
       renderCell: (params) => {
         const linkUrl = params.value;
