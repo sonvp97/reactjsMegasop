@@ -45,7 +45,7 @@ function Search() {
         },
       });
       console.log(response.data.status);
-      if (response.data.status === "on") {
+      if (response.data.status === "success") {
         setLoading(true);
         setTime(response.data.next_time);
       } else {
