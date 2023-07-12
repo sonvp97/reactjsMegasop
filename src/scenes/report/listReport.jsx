@@ -54,7 +54,11 @@ function Search() {
   };
   
   const handleBrandChange = (event) => {
-    setBrand(event.target.value)
+    if (event.target.value == 0){
+      setBrand(null)
+    }else{
+      setBrand(event.target.value)
+    }
   };
   const handleTime1Change = (newValue) => {
     setFromDate(newValue.$d);
@@ -136,6 +140,7 @@ function Search() {
   };
 
   const brandNames = {
+    0: "None",
     1: "Hasaki",
     2: "Pharmacity",
     3: "Guardian",
