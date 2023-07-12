@@ -95,14 +95,12 @@ function Search() {
       headerName: "#",
       align: "center",
       headerAlign: "center",
-      minWidth: 20,
-      maxWidth: 80,
+      width: 40,
     },
     {
       field: "name",
       headerName: "Name",
-      minWidth: 450,
-      maxWidth: 1500,
+      width: 450,
       renderCell: (params) => {
         return (
           <div
@@ -122,32 +120,28 @@ function Search() {
     {
       field: "price",
       headerName: "Price",
-      minWidth: 150,
-      maxWidth: 200,
+      width: 150,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      minWidth: 150,
-      maxWidth: 200,
+      width: 150,
     },
     {
       field: "status",
       headerName: "Status",
-      minWidth: 150,
-      maxWidth: 200,
+      width: 150,
     },
     {
       field: "crawl_time",
       headerName: "Crawl Time",
-      minWidth: 150,
-      maxWidth: 200,
+      width: 150,
     },
   ];
 
   return (
     <>
-      <Box m="1.5rem 2.5rem" maxWidth={"170vh"}>
+      <Box m="1.5rem 2.5rem" width="100%">
         <ToastContainer />
         <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
@@ -214,8 +208,8 @@ function Search() {
             rowCount={totalRows}
             paginationMode="server"
           />
+          </Box>
         </Box>
-      </Box>
     </>
   );
 }

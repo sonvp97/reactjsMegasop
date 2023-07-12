@@ -8,21 +8,11 @@ import {
   useTheme,
   Modal,
   Typography,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  IconButton,
-  Link
 } from "@mui/material";
 import Header from "components/Header";
-import { DataGrid } from "@mui/x-data-grid";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "scenes/api/api";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import CloseIcon from '@mui/icons-material/Close';
+
 
 function Search() {
   const authToken = JSON.parse(JSON.stringify(localStorage.getItem("token")));
@@ -37,6 +27,7 @@ function Search() {
   useEffect(() => {
     getStatus();
   }, [isTime]);
+
   const getStatus = async () => {
     try {
       const response = await axios.get(API_BASE_URL + "/job-exist", {
@@ -68,6 +59,7 @@ function Search() {
   };
   const handleSubmit = async (e) => {
     setLoading(true);
+    setTime("")
     e.preventDefault();
     try {
       const status = "true";
@@ -145,7 +137,6 @@ function Search() {
           },
         }
       );
-      setIsTime(!isTime);
       console.log(response.data);
       if (response.data === "deleted") {
         toast.success("Tự động Crawl đã được tắt", {
