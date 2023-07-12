@@ -143,32 +143,27 @@ function Search() {
     {
       field: "name",
       headerName: "Name",
-      minWidth: 400,
-      maxWidth: 600,
+      width: 400
     },
     {
       field: "brand_name",
       headerName: "Brand Name",
-      minWidth: 120,
-      maxWidth: 200,
+      width: 120
     },
     {
       field: "price",
       headerName: "Price",
-      minWidth: 100,
-      maxWidth: 200,
+      width: 100
     },
     {
       field: "quantity",
       headerName: "Sold Items",
-      minWidth: 100,
-      maxWidth: 200,
+      width: 100
     },
     {
       field: "link",
       headerName: "Link",
-      minWidth: 650,
-      maxWidth: 1500,
+      width: 650,
       renderCell: (params) => {
         const linkUrl = params.value;
         return (

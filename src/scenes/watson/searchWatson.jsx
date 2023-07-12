@@ -142,9 +142,7 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      minWidth:50,
-      align: "center",
-      headerAlign: "center",
+      width:50
     },
     {
       field: "name",

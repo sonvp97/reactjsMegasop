@@ -141,9 +141,7 @@ function Search() {
     {
       field: "stt",
       headerName: "#",
-      width:30,
-      minWidth: 20,
-      maxWidth: 40,
+      width: 50
     },
     {
       field: "name",
