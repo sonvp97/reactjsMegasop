@@ -47,11 +47,15 @@ function Search() {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [status, setStatus] = useState("");
+  const [brand, setBrand] = useState(null);
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
-
+  
+  const handleBrandChange = (event) => {
+    setBrand(event.target.value)
+  };
   const handleTime1Change = (newValue) => {
     setFromDate(newValue.$d);
   };
@@ -77,10 +81,12 @@ function Search() {
       const limit = paginationModel.pageSize;
       const from_date = fromDate;
       const to_date = toDate;
+      const brand_id = brand;
       const response = await axios.get(API_BASE_URL + "/report", {
         params: {
           from_date,
           to_date,
+          brand_id,
           skip,
           limit,
         },
@@ -284,7 +290,7 @@ function Search() {
             },
           }}
         >
-          <Box sx={{ display: "flex", mr: 3, mb: 2 }}>
+          <Box sx={{ display: "flex", mr: 3, mb: 2, alignItems: "center" }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="From Date"
@@ -301,10 +307,28 @@ function Search() {
                 format="yyyy-MM-dd"
               />
             </LocalizationProvider>
+            <FormControl sx={{ mb: 2, minWidth: "150px", mt: 3 }}>
+              <InputLabel id="brand-select-label" sx={{ top: "-5px" }}>
+                Brand
+              </InputLabel>
+              <Select
+                labelId="brand-select-label"
+                id="brand-select"
+                label="brand"
+                value={brand}
+                sx={{ height: "40px" }}
+                onChange={handleBrandChange}
+              >
+                {Object.entries(brandNames).map(([key, value]) => (
+                  <MenuItem key={key} value={key}>
+                    {value}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <IconButton
               onClick={handleSearchReport}
               sx={{
-                top: -5,
                 width: 50,
                 height: 50,
               }}
