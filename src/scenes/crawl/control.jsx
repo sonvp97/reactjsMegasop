@@ -59,7 +59,6 @@ function Search() {
   };
   const handleSubmit = async (e) => {
     setLoading(true);
-    setTime("")
     e.preventDefault();
     try {
       const status = "true";
@@ -148,6 +147,7 @@ function Search() {
       setOpen(false);
     } catch (error) {}
     setLoading(false);
+    setTime("")
   };
 
   return (
