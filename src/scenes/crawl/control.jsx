@@ -47,8 +47,7 @@ function Search() {
       console.log(response.data.status);
       if (response.data.status === "on") {
         setLoading(true);
-        setNumber(response.data.schedule);
-        setTime(response.data.time_next);
+        setTime(response.data.next_time);
       } else {
         setTime("");
         setLoading(false);
@@ -71,16 +70,17 @@ function Search() {
     setLoading(true);
     e.preventDefault();
     try {
-      const status = true;
-      const hour = parseInt(number);
-      const minute = 0;
-      console.log(hour);
+      const status = "true";
+      const quantity = parseInt(number);
+      const unit = "hour";
+      const name = "cronjob"
       const response = await axios.post(
         API_BASE_URL + "/cron-job",
         {
           status,
-          hour,
-          minute,
+          quantity,
+          unit,
+          name
         },
         {
           headers: {
@@ -127,15 +127,17 @@ function Search() {
 
   const handleConfirm = async () => {
     try {
-      const status = false;
-      const hour = 0;
-      const minute = 0;
+      const status = "false";
+      const quantity = parseInt(number);
+      const unit = "hour";
+      const name = "cronjob"
       const response = await axios.post(
         API_BASE_URL + "/cron-job",
         {
           status,
-          hour,
-          minute,
+          quantity,
+          unit,
+          name
         },
         {
           headers: {
