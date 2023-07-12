@@ -312,7 +312,7 @@ function Search() {
                 format="yyyy-MM-dd"
               />
             </LocalizationProvider>
-            <FormControl sx={{ mb: 2, minWidth: "150px", mt: 3 }}>
+            <FormControl sx={{ minWidth: "150px" }}>
               <InputLabel id="brand-select-label" sx={{ top: "-5px" }}>
                 Brand
               </InputLabel>
