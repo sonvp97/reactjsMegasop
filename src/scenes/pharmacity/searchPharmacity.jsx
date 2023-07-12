@@ -265,7 +265,6 @@ function Search() {
               </Button>
             </Box>
           </Grid>
-          <div style={{ width: "100%", overflowX: "auto" }}>
           <DataGrid
             getRowId={(row) => row.id}
             columns={columns}
@@ -292,7 +291,6 @@ function Search() {
             }}
             rowSelectionModel={selectedRowIds}
           />
-          </div>
           <Modal open={open} onClose={handleClose}>
             <Box
               sx={{
