@@ -36,7 +36,7 @@ function Search() {
         },
       });
       console.log(response.data.status);
-      if (response.data.status === "success") {
+      if (response.data.message === "on") {
         setLoading(true);
         setTime(response.data.next_time);
       } else {

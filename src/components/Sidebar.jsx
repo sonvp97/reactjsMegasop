@@ -188,7 +188,7 @@ const Sidebar = ({
               width: drawerWidth,
             },
             "& .MuiPaper-root::-webkit-scrollbar": {
-              overflowY: "hidden",
+              overflowY: "auto",
             },
           }}
         >
@@ -274,7 +274,7 @@ const Sidebar = ({
                         <ListItemText primary={text} />
                         {children ? <ExpandMore /> : ""}
                         {active === lcText && (
-                          <ChevronRightOutlined sx={{ ml: "auto" }} />
+                          <ChevronRightOutlined sx={{ ml:"auto" }} />
                         )}
                       </ListItemButton>
                     </ListItem>
