@@ -60,6 +60,7 @@ function Search() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    setOpenModal(false);
     try {
       const status = "true";
       const quantity = parseInt(number);
@@ -81,7 +82,7 @@ function Search() {
       );
       setIsTime(!isTime);
       console.log("Yêu cầu đã được gửi thành công!");
-      if (response.data === "success") {
+      if (response.data.status === "success") {
         toast.success("Tự động Crawl đã được bật", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
@@ -91,7 +92,6 @@ function Search() {
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
-    setOpenModal(false);
   };
 
   const [open, setOpen] = useState(false);
@@ -117,6 +117,7 @@ function Search() {
   };
 
   const handleConfirm = async () => {
+    setOpen(false);
     try {
       const status = "false";
       const quantity = parseInt(number);
@@ -137,14 +138,13 @@ function Search() {
         }
       );
       console.log(response.data);
-      if (response.data === "deleted") {
+      if (response.data.status === "success") {
         toast.success("Tự động Crawl đã được tắt", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,
         });
       }
-      setOpen(false);
     } catch (error) {}
     setLoading(false);
     setTime("")
