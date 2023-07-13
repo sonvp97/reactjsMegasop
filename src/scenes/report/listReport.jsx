@@ -154,14 +154,14 @@ function Search() {
     {
       field: "id",
       headerName: "#",
-      flex: 0.1,
+      width: 40,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.8,
+      width: 450,
       renderCell: (params) => (
         <Link
           href={params.value}
@@ -177,13 +177,13 @@ function Search() {
     {
       field: "status",
       headerName: "Status",
-      flex: 0.2,
+      width: 200,
       valueGetter: (params) => statusNames[params.value] || "",
     },
     {
       field: "time",
       headerName: "Crawl Time",
-      flex: 0.3,
+      width: 200,
     },
   ];
   const columns = [
@@ -356,8 +356,8 @@ function Search() {
                 position: "absolute",
                 top: 0,
                 right: 0,
-                width: "100%",
-                maxWidth: "1000px",
+                width: "calc(100% - 500px)",
+                height: "calc(100% - 80px)",     
                 bgcolor: theme.palette.primary[700],
                 borderRadius: "8px 0 0 0",
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
@@ -396,7 +396,8 @@ function Search() {
                   {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
                 </IconButton>
               </Box>
-              <DataGrid
+              
+                <DataGrid
                 rows={dataReport ? dataReport : []}
                 columns={columnReportDetail}
                 paginationModel={paginationModelReport}
@@ -404,12 +405,10 @@ function Search() {
                 pageSizeOptions={[10, 20, 30]}
                 rowCount={totalRowReport}
                 paginationMode="server"
-                sx={{
-                  maxHeight: "500px",
-                  maxWidth: "1000px",
-                }}
+              
+                sx={{ height: "calc(100% - 150px)" }}
               />
-            </Box>
+              </Box>
           </Modal>
         </Box>
       </Box>
