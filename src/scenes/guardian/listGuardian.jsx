@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Box,
-  Button,
   Grid,
   TextField,
   useTheme,
@@ -141,13 +140,16 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2rem" width="100%">
+      <Box
+        m="1.5rem 2rem"
+      >
         <ToastContainer />
         <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
-          mt="40px"
-          height="75vh"
+           mt="40px"
+           height="75vh"
           sx={{
+            
             "& .MuiDataGrid-root": {
               border: "none",
             },
@@ -180,21 +182,24 @@ function Search() {
               maxWidth: "1189.2px",
               maxHeight: "559.2px",
             },
+            "& .MuiGrid-item": {
+              maxWidth: "1189.2px",
+            },
           }}
         >
-          <Grid item xs={10} sm={8} md={6} lg={4}>
+          <Grid>
             <Box display={"flex"} sx={{ mb: 3 }}>
-            <TextField
+              <TextField
                 fullWidth
                 label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
-                style={{width:200, minWidth: 200, maxWidth:800}}
+                style={{ width: 200, minWidth: 200, maxWidth: 800 }}
                 onKeyDown={handleKeyDown}
               />
-               <IconButton onClick={handleSubmit}>
+              <IconButton onClick={handleSubmit}>
                 {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
               </IconButton>
             </Box>
@@ -208,8 +213,8 @@ function Search() {
             rowCount={totalRows}
             paginationMode="server"
           />
-          </Box>
         </Box>
+      </Box>
     </>
   );
 }

@@ -146,7 +146,7 @@ function Search() {
     {
       field: "name",
       headerName: "Name",
-      minWidth: 600,
+      minWidth: 400,
       maxWidth: 1000,
     },
     {

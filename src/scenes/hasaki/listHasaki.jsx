@@ -94,34 +94,34 @@ function Search() {
     {
       field: "id",
       headerName: "#",
-      flex: 0.1,
+      width: 40,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.5,
+      width: 400,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.2,
+      width: 150,
     },
     {
       field: "original_price",
       headerName: "Original price",
-      flex: 0.2,
+      width: 150,
     },
     {
       field: "total",
       headerName: "Status",
-      flex: 0.2,
+      width: 150,
     },
     {
       field: "crawl_time",
       headerName: "Crawl Time",
-      flex: 0.2,
+      width: 150,
     },
   ];
 

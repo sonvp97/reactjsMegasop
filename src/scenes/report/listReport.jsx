@@ -190,14 +190,14 @@ function Search() {
     {
       field: "id",
       headerName: "#",
-      flex: 0.1,
+      width: 40,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "brand_id",
       headerName: "Name Brand",
-      flex: 0.2,
+      width: 200,
       renderCell: (params) => {
         const brandName = brandNames[params.value] || "";
         return (
@@ -213,33 +213,33 @@ function Search() {
     {
       field: "total",
       headerName: "Total Link",
-      flex: 0.2,
+      width: 200,
     },
     {
       field: "success",
       headerName: "Success",
-      flex: 0.2,
+      width: 150,
     },
     {
       field: "failure",
       headerName: "Failure",
-      flex: 0.2,
+      width: 150,
     },
     {
       field: "start_crawl",
       headerName: "Start Crawl",
-      flex: 0.2,
+      width: 200,
     },
     {
       field: "end_crawl",
       headerName: "End Crawl",
-      flex: 0.2,
+      width: 200,
     },
   ];
 
   return (
     <>
-      <Box m="1.5rem 2rem">
+      <Box m="1.5rem 2.5rem">
         <Header title="Report" />
         <Box
           mt="40px"

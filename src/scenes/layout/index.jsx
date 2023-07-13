@@ -45,7 +45,7 @@ function Layout() {
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
-      <Box flexGrow={1}>
+      <Box flexGrow={1} width="calc(100% - 260px)">
         <Navbar
           user={{}}
           isSidebarOpen={isSidebarOpen}
