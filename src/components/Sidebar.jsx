@@ -186,10 +186,17 @@ const Sidebar = ({
               boxSixing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
+              overflowY: "scroll",
+
             },
             "& .MuiPaper-root::-webkit-scrollbar": {
-              overflowY: "auto",
+              overflowY: "scroll",
+              backgroundColor: "#3e5867"
+
             },
+            "& .element::-webkit-scrollbar-thumb": {
+              backgroundColor: theme.palette.secondary[800]
+            }
           }}
         >
           <Box width="100%">

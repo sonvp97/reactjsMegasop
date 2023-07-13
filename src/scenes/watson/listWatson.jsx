@@ -127,7 +127,7 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2.5rem">
+      <Box m="1.5rem 2rem">
         <ToastContainer />
         <Header title="WATSONS" subtitle="List Watsons" />
         <Box

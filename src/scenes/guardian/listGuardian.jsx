@@ -141,7 +141,7 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2.5rem" width="100%">
+      <Box m="1.5rem 2rem" width="100%">
         <ToastContainer />
         <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
