@@ -127,7 +127,7 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2rem">
+      <Box m="1.5rem 1.8rem">
         <ToastContainer />
         <Header title="WATSONS" subtitle="List Watsons" />
         <Box
@@ -162,21 +162,24 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
+            "& .MuiDataGrid-root--densityStandard": {
+              maxHeight: "559.2px",
+            },
           }}
         >
           <Grid item xs={10} sm={8} md={6} lg={4}>
-          <Box sx={{ mb: 3 }}>
-            <TextField
+            <Box sx={{ mb: 3 }}>
+              <TextField
                 fullWidth
                 label="Search"
                 name="search"
                 onChange={handleChange}
                 variant="outlined"
                 size="small"
-                style={{width:200, minWidth: 200, maxWidth:800}}
+                style={{ width: 200, minWidth: 200, maxWidth: 800 }}
                 onKeyDown={handleKeyDown}
               />
-               <IconButton onClick={handleSubmit}>
+              <IconButton onClick={handleSubmit}>
                 {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
               </IconButton>
             </Box>

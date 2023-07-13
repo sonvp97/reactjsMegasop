@@ -52,12 +52,12 @@ function Search() {
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
-  
+
   const handleBrandChange = (event) => {
-    if (event.target.value == 0){
-      setBrand(null)
-    }else{
-      setBrand(event.target.value)
+    if (event.target.value == 0) {
+      setBrand(null);
+    } else {
+      setBrand(event.target.value);
     }
   };
   const handleTime1Change = (newValue) => {
@@ -239,7 +239,7 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2.5rem">
+      <Box m="1.5rem 1.8rem">
         <Header title="Report" />
         <Box
           mt="40px"
@@ -273,25 +273,12 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-1u3bzj6-MuiFormControl-root-MuiTextField-root": {
-              marginRight: "10px",
-            },
-            "& .css-v3zyv7-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-              {
-                width: "80px",
-              },
-            "& .css-3cyd2n": {
-              width: "100%",
-            },
             "& .MuiDataGrid-root--densityStandard": {
-              maxWidth: "1189.2px",
               maxHeight: "559.2px",
-            },
-            "& .css-1vgpi90-MuiFormControl-root": {
-              minWidth: "150px",
             },
             "& .css-z35w7p": {
               height: "40px",
+              marginRight: "5px"
             },
           }}
         >
@@ -357,7 +344,7 @@ function Search() {
                 top: 0,
                 right: 0,
                 width: "calc(100% - 500px)",
-                height: "calc(100% - 80px)",     
+                height: "calc(100% - 80px)",
                 bgcolor: theme.palette.primary[700],
                 borderRadius: "8px 0 0 0",
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
@@ -396,8 +383,7 @@ function Search() {
                   {loading ? <CircularProgress size={24} /> : <FilterAltIcon />}
                 </IconButton>
               </Box>
-              
-                <DataGrid
+              <DataGrid
                 rows={dataReport ? dataReport : []}
                 columns={columnReportDetail}
                 paginationModel={paginationModelReport}
@@ -405,10 +391,9 @@ function Search() {
                 pageSizeOptions={[10, 20, 30]}
                 rowCount={totalRowReport}
                 paginationMode="server"
-              
                 sx={{ height: "calc(100% - 150px)" }}
               />
-              </Box>
+            </Box>
           </Modal>
         </Box>
       </Box>

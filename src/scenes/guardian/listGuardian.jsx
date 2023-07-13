@@ -140,9 +140,7 @@ function Search() {
 
   return (
     <>
-      <Box
-        m="1.5rem 2rem"
-      >
+      <Box m="1.5rem 1.8rem">
         <ToastContainer />
         <Header title="GUARDIAN" subtitle="List Guardian" />
         <Box
@@ -179,11 +177,7 @@ function Search() {
               color: "white",
             },
             "& .MuiDataGrid-root--densityStandard": {
-              maxWidth: "1189.2px",
               maxHeight: "559.2px",
-            },
-            "& .MuiGrid-item": {
-              maxWidth: "1189.2px",
             },
           }}
         >

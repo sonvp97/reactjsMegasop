@@ -127,7 +127,7 @@ function Search() {
 
   return (
     <>
-      <Box m="1.5rem 2rem">
+      <Box m="1.5rem 1.8rem">
         <ToastContainer />
         <Header title="HASAKI" subtitle="List Product" />
         <Box
@@ -162,8 +162,7 @@ function Search() {
             "& .MuiDataGrid-checkboxInput.Mui-checked": {
               color: "white",
             },
-            "& .css-1h9s6c4-MuiDataGrid-root": {
-              maxWidth: "1189.2px",
+            "& .MuiDataGrid-root--densityStandard": {
               maxHeight: "559.2px",
             },
           }}
